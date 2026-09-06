@@ -528,4 +528,242 @@
         <div class="form-subtext">복사하셔서 작성해주세요!</div>
         <div class="form-list">
             <div class="form-item"><span class="form-num">1.</span><span class="form-input-placeholder">닉네임 / 입금자명 :</span></div>
-            <div class="form-item"><span class="form
+            <div class="form-item"><span class="form-num">2.</span><span class="form-input-placeholder">신청 유형 및 개수 :</span></div>
+            <div class="form-item"><span class="form-num">3.</span><span class="form-input-placeholder">참고 이미지 및 요청사항 :</span></div>
+            <div class="form-item"><span class="form-num">4.</span><span class="form-input-placeholder">이메일 주소 :</span></div>
+        </div>
+    </div>
+
+    <div class="line-card">
+        <div class="card-badge">진행순서</div>
+        <div class="process-flow">
+            <div class="process-step"><span class="step-num">1</span>의뢰+견적</div>
+            <div class="process-step"><span class="step-num">2</span>결제</div>
+            <div class="process-step"><span class="step-num">3</span>러프확인</div>
+            <div class="process-step"><span class="step-num">4</span>완성본 전달</div>
+        </div>
+    </div>
+
+    <div class="outer-frame">
+        <div class="frame-header"><div class="frame-title-badge">이모티콘</div></div>
+        
+        <div class="tab-container" id="tab-group-1">
+            <button class="tab-btn active" onclick="switchTab('tab-group-1', 'content-group-1', 0)">글자티콘</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 1)">구독티콘</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 2)">움짤티콘</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 3)">뱃지</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 4)">OGQ</button>
+        </div>
+
+        <div class="tab-content-wrapper" id="content-group-1">
+            <div class="tab-panel active">
+                <div class="header-group"><div class="price-text">개당 0.7</div></div>
+                <div class="grid-responsive" id="grid-texticon-main"></div>
+                <div class="grid-responsive more-content" id="more-texticon"></div>
+                <button class="btn-more" id="btn-texticon" onclick="toggleMore('more-texticon', this)">더보기 ↓</button>
+            </div>
+            <div class="tab-panel">
+                <div class="header-group"><div class="price-text">개당 1.5</div></div>
+                <div class="grid-responsive" id="grid-subicon-main"></div>
+                <div class="grid-responsive more-content" id="more-subicon"></div>
+                <button class="btn-more" id="btn-subicon" onclick="toggleMore('more-subicon', this)">더보기 ↓</button>
+            </div>
+            <div class="tab-panel">
+                <div class="header-group"><div class="price-text">개당 2.5 ~ 3.5</div></div>
+                <div class="grid-responsive" id="grid-gificon-main"></div>
+                <div class="grid-responsive more-content" id="more-gificon"></div>
+                <button class="btn-more" id="btn-gificon" onclick="toggleMore('more-gificon', this)">더보기 ↓</button>
+            </div>
+            <div class="tab-panel">
+                <div class="header-group"><div class="price-text">개당 1.0</div></div>
+                <div class="grid-responsive" id="grid-badge-main"></div>
+                <div class="grid-responsive more-content" id="more-badge"></div>
+                <button class="btn-more" id="btn-badge" onclick="toggleMore('more-badge', this)">더보기 ↓</button>
+            </div>
+            <div class="tab-panel">
+                <div class="header-group"><div class="price-text">세트 50.0</div></div>
+                <div class="grid-responsive" id="grid-ogq-main"></div>
+                <div class="grid-responsive more-content" id="more-ogq"></div>
+                <button class="btn-more" id="btn-ogq" onclick="toggleMore('more-ogq', this)">더보기 ↓</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="outer-frame">
+        <div class="frame-header"><div class="frame-title-badge">방송화면 & 배너</div></div>
+        
+        <div class="tab-container" id="tab-group-2">
+            <button class="tab-btn active" onclick="switchTab('tab-group-2', 'content-group-2', 0)">방송화면</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-2', 'content-group-2', 1)">상단배너</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-2', 'content-group-2', 2)">하단배너</button>
+        </div>
+
+        <div class="tab-content-wrapper" id="content-group-2">
+            <div class="tab-panel active">
+                <div class="header-group"><div class="price-text">개당 5.0</div></div>
+                <div class="grid-responsive" id="grid-screen-main"></div>
+                <div class="grid-responsive more-content" id="more-screen"></div>
+                <button class="btn-more" id="btn-screen" onclick="toggleMore('more-screen', this)">더보기 ↓</button>
+            </div>
+            <div class="tab-panel">
+                <div class="header-group"><div class="price-text">개당 3.0</div></div>
+                <div class="grid-responsive" id="grid-topbanner-main"></div>
+                <div class="grid-responsive more-content" id="more-topbanner"></div>
+                <button class="btn-more" id="btn-topbanner" onclick="toggleMore('more-topbanner', this)">더보기 ↓</button>
+            </div>
+            <div class="tab-panel">
+                <div class="header-group"><div class="price-text">개당 2.0</div></div>
+                <div class="grid-responsive" id="grid-botbanner-main"></div>
+                <div class="grid-responsive more-content" id="more-botbanner"></div>
+                <button class="btn-more" id="btn-botbanner" onclick="toggleMore('more-botbanner', this)">더보기 ↓</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="outer-frame">
+        <div class="frame-header"><div class="frame-title-badge">시그니처 & 기타</div></div>
+        
+        <div class="tab-container" id="tab-group-3">
+            <button class="tab-btn active" onclick="switchTab('tab-group-3', 'content-group-3', 0)">시그니처풍선</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-3', 'content-group-3', 1)">채팅 아바타</button>
+        </div>
+
+        <div class="tab-content-wrapper" id="content-group-3">
+            <div class="tab-panel active">
+                <div class="header-group"><div class="price-text">개당 2.0</div></div>
+                <div class="grid-responsive" id="grid-balloon-main"></div>
+                <div class="grid-responsive more-content" id="more-balloon"></div>
+                <button class="btn-more" id="btn-balloon" onclick="toggleMore('more-balloon', this)">더보기 ↓</button>
+            </div>
+            <div class="tab-panel">
+                <div class="header-group"><div class="price-text">개당 4.0</div></div>
+                <div class="grid-responsive" id="grid-avatar-main"></div>
+                <div class="grid-responsive more-content" id="more-avatar"></div>
+                <button class="btn-more" id="btn-avatar" onclick="toggleMore('more-avatar', this)">더보기 ↓</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="imgModal" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-container" id="modalContainer">
+            <img id="modalImg" class="modal-content" src="" alt="확대 이미지">
+        </div>
+    </div>
+
+    <script>
+        const config = {
+            defaultShowCount: 10,
+            items: [
+                /* 1단락 */
+                { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', total: 50 },
+                { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon', total: 30 },
+                { mainId: 'grid-gificon-main', moreId: 'more-gificon', btnId: 'btn-gificon', path: 'img/gificon', total: 20 },
+                { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge', total: 40 },
+                { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq', total: 20 },
+                /* 2단락 */
+                { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen', total: 20 },
+                { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner', total: 20 },
+                { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner', total: 20 },
+                /* 3단락 */
+                { mainId: 'grid-balloon-main', moreId: 'more-balloon', btnId: 'btn-balloon', path: 'img/balloon', total: 20 },
+                { mainId: 'grid-avatar-main', moreId: 'more-avatar', btnId: 'btn-avatar', path: 'img/avatar', total: 20 }
+            ]
+        };
+
+        // PNG -> GIF 순서로 자동 교체 탐색 로직
+        window.addEventListener('DOMContentLoaded', () => {
+            config.items.forEach(item => {
+                const mainContainer = document.getElementById(item.mainId);
+                const moreContainer = document.getElementById(item.moreId);
+                const btnMore = document.getElementById(item.btnId);
+
+                if (!mainContainer) return;
+
+                if (item.total <= config.defaultShowCount && btnMore) {
+                    btnMore.style.display = 'none';
+                }
+
+                for (let i = 1; i <= item.total; i++) {
+                    const targetContainer = (i <= config.defaultShowCount) ? mainContainer : moreContainer;
+
+                    const box = document.createElement('div');
+                    box.className = 'sample-box';
+                    box.onclick = function() { openModal(this); };
+
+                    const img = document.createElement('img');
+                    
+                    // 1차 시도: PNG
+                    img.src = `${item.path}/${i}.png`;
+                    img.alt = `샘플 ${i}`;
+
+                    // PNG가 없는 경우 2차 시도: GIF로 변경
+                    img.onerror = function() {
+                        if (this.src.endsWith('.png')) {
+                            this.src = `${item.path}/${i}.gif`;
+                        } else {
+                            // PNG도 GIF도 없으면 상자 제거
+                            box.remove();
+                        }
+                    };
+
+                    box.appendChild(img);
+                    targetContainer.appendChild(box);
+                }
+            });
+        });
+
+        // 탭 전환
+        function switchTab(groupId, contentId, index) {
+            const tabContainer = document.getElementById(groupId);
+            const buttons = tabContainer.querySelectorAll('.tab-btn');
+            const contentWrapper = document.getElementById(contentId);
+            const panels = contentWrapper.querySelectorAll('.tab-panel');
+
+            buttons.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('active');
+                    panels[i].classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                    panels[i].classList.remove('active');
+                }
+            });
+        }
+
+        // 더보기 토글
+        function toggleMore(id, btn) {
+            const target = document.getElementById(id);
+            if (target.classList.contains('show')) {
+                target.classList.remove('show');
+                btn.innerText = '더보기 ↓';
+            } else {
+                target.classList.add('show');
+                btn.innerText = '접기 ↑';
+            }
+        }
+
+        // 모달 기능
+        function openModal(element) {
+            const img = element.querySelector('img');
+            if (img && img.getAttribute('src')) {
+                const modal = document.getElementById('imgModal');
+                const modalContainer = document.getElementById('modalContainer');
+                const modalImg = document.getElementById('modalImg');
+                
+                modalImg.src = img.src;
+
+                const rect = element.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const clickY = rect.top + scrollTop + (rect.height / 2);
+
+                modalContainer.style.top = clickY + 'px';
+                modal.style.display = 'block';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('imgModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
