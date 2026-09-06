@@ -25,7 +25,7 @@
             position: relative;
         }
 
-        /* [상단 안내 섹션] #9D96F4 보라색 선 테두리 스타일 */
+        /* [일반 선 카드] 신청양식, 진행순서용 */
         .line-card {
             width: 100%;
             border: 2.5px solid #9D96F4;
@@ -33,6 +33,16 @@
             padding: 28px 20px 20px 20px;
             position: relative;
             background-color: #FFFFFF;
+        }
+
+        /* [수정] 공지사항 전용 면채움 카드 스타일 */
+        .notice-card {
+            width: 100%;
+            background-color: #ECEAFE;
+            border-radius: 20px;
+            padding: 28px 20px 20px 20px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(157, 150, 244, 0.12);
         }
 
         .card-badge {
@@ -50,6 +60,23 @@
             white-space: nowrap;
         }
 
+        /* [수정] 공지사항 강조 배지 스타일 (반짝이 ✦ 추가 및 강조) */
+        .notice-badge {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #9D96F4;
+            color: #FFFFFF;
+            font-size: 17px;
+            font-weight: 800;
+            padding: 5px 24px;
+            border-radius: 20px;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(157, 150, 244, 0.35);
+            letter-spacing: 1px;
+        }
+
         /* 주문일정 양옆 2개 선 스타일 (double border) */
         .schedule-box {
             width: 100%;
@@ -64,7 +91,16 @@
             background-color: #FFFFFF;
         }
 
-        .notice-subtext, .form-subtext {
+        .notice-subtext {
+            text-align: center;
+            font-size: 13.5px;
+            color: #5247D6;
+            margin-bottom: 16px;
+            margin-top: 4px;
+            font-weight: 700;
+        }
+
+        .form-subtext {
             text-align: center;
             font-size: 13px;
             color: #666;
@@ -80,16 +116,19 @@
             gap: 8px;
         }
 
+        /* [수정] 공지사항 체크 리스트 아이템 배경 흰색으로 가독성 확보 */
         .check-item {
-            border: 1.5px solid #9D96F4;
+            background-color: #FFFFFF;
+            border: 1.5px solid #C8C2FC;
             border-radius: 12px;
-            padding: 10px 14px;
+            padding: 11px 14px;
             font-size: 13.5px;
-            color: #444;
+            color: #333;
             display: flex;
             align-items: flex-start;
             gap: 8px;
             line-height: 1.4;
+            font-weight: 500;
         }
 
         .check-item::before {
@@ -174,7 +213,7 @@
             z-index: 2;
         }
 
-        /* [수정] 하단 샘플 프레임 배경색 연하게 변경 (#D8D5FB -> #ECEAFE) */
+        /* 하단 샘플 프레임 배경색 (#ECEAFE) */
         .outer-frame {
             width: 100%;
             background-color: #ECEAFE;
@@ -403,15 +442,13 @@
 </head>
 <body>
 
-    <!-- 1. 일정안내 -->
     <div class="schedule-box">
         8월 주문 마감되었습니다<br>
         9월 주문 받고 있어요!
     </div>
 
-    <!-- 2. 공지사항 -->
-    <div class="line-card">
-        <div class="card-badge">공지사항</div>
+    <div class="notice-card">
+        <div class="notice-badge">✦ 공지사항 ✦</div>
         <div class="notice-subtext">아래 사항을 숙지하지 않아 생기는 불이익은 책임지지 않습니다.</div>
         <ul class="check-list">
             <li class="check-item">작업물의 저작권은 작가에게 있으며, 상업적 이용 및 2차가공은 불가합니다.</li>
@@ -422,7 +459,6 @@
         </ul>
     </div>
 
-    <!-- 3. 신청양식 -->
     <div class="line-card">
         <div class="card-badge">신청양식</div>
         <div class="form-subtext">복사하셔서 작성해주세요!</div>
@@ -450,7 +486,6 @@
         </div>
     </div>
 
-    <!-- 4. 진행순서 -->
     <div class="line-card">
         <div class="card-badge">진행순서</div>
         <div class="process-flow">
@@ -461,7 +496,6 @@
         </div>
     </div>
 
-    <!-- [샘플 영역 1] 이모티콘 탭 폴더 -->
     <div class="outer-frame">
         <div class="frame-header">
             <div class="frame-title-badge">이모티콘</div>
@@ -476,7 +510,6 @@
         </div>
 
         <div class="tab-content-wrapper" id="content-group-1">
-            <!-- 글자티콘 -->
             <div class="tab-panel active">
                 <div class="header-group"><div class="price-text">개당 0.7</div></div>
                 <div class="grid-responsive">
@@ -498,7 +531,6 @@
                 <button class="btn-more" onclick="toggleMore('more-texticon', this)">더보기 ↓</button>
             </div>
 
-            <!-- 구독티콘 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.5</div></div>
                 <div class="grid-responsive">
@@ -520,7 +552,6 @@
                 <button class="btn-more" onclick="toggleMore('more-subicon', this)">더보기 ↓</button>
             </div>
 
-            <!-- 움짤티콘 -->
             <div class="tab-panel">
                 <div class="header-group">
                     <div class="price-text">[미니 모션] 개당 2.5</div>
@@ -554,7 +585,6 @@
                 <button class="btn-more" onclick="toggleMore('more-gificon', this)">더보기 ↓</button>
             </div>
 
-            <!-- 뱃지 -->
             <div class="tab-panel">
                 <div class="header-group">
                     <div class="price-text">개당 1.0</div>
@@ -579,7 +609,6 @@
                 <button class="btn-more" onclick="toggleMore('more-badge', this)">더보기 ↓</button>
             </div>
 
-            <!-- OGQ -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">기본 50.0 / 움짤 100.0</div></div>
                 <div class="grid-responsive">
@@ -601,7 +630,6 @@
         </div>
     </div>
 
-    <!-- [샘플 영역 2] 방송 그래픽 탭 폴더 -->
     <div class="outer-frame">
         <div class="frame-header">
             <div class="frame-title-badge">방송 그래픽</div>
@@ -615,7 +643,6 @@
         </div>
 
         <div class="tab-content-wrapper" id="content-group-2">
-            <!-- 시그니처풍선 -->
             <div class="tab-panel active">
                 <div class="header-group"><div class="price-text">개당 4.0 (GIF)</div></div>
                 <div class="grid-responsive">
@@ -635,7 +662,6 @@
                 <button class="btn-more" onclick="toggleMore('more-balloon', this)">더보기 ↓</button>
             </div>
 
-            <!-- 방송화면/대기화면 -->
             <div class="tab-panel">
                 <div class="header-group">
                     <div class="price-text">[ 인물 별도! 배경 가격만입니다! ]</div>
@@ -658,7 +684,6 @@
                 <button class="btn-more" onclick="toggleMore('more-screen', this)">더보기 ↓</button>
             </div>
 
-            <!-- 상단배너/채널아트 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">상단배너 / 채널아트</div></div>
                 <div class="grid-responsive">
@@ -678,7 +703,6 @@
                 <button class="btn-more" onclick="toggleMore('more-topbanner', this)">더보기 ↓</button>
             </div>
 
-            <!-- 하단배너 -->
             <div class="tab-panel">
                 <div class="header-group">
                     <div class="price-text">개당 3.0</div>
@@ -703,7 +727,6 @@
         </div>
     </div>
 
-    <!-- [샘플 영역 3] 애니메이션 탭 폴더 -->
     <div class="outer-frame">
         <div class="frame-header">
             <div class="frame-title-badge">애니메이션</div>
@@ -716,7 +739,6 @@
         </div>
 
         <div class="tab-content-wrapper" id="content-group-3">
-            <!-- 채팅 아바타 -->
             <div class="tab-panel active">
                 <div class="header-group"><div class="price-text">채팅 아바타</div></div>
                 <div class="grid-responsive">
@@ -736,7 +758,6 @@
                 <button class="btn-more" onclick="toggleMore('more-chatavatar', this)">더보기 ↓</button>
             </div>
 
-            <!-- 후원움짤 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">후원움짤</div></div>
                 <div class="grid-responsive">
@@ -756,7 +777,6 @@
                 <button class="btn-more" onclick="toggleMore('more-donateanim', this)">더보기 ↓</button>
             </div>
 
-            <!-- 짚톡 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">짚톡</div></div>
                 <div class="grid-responsive">
@@ -778,7 +798,6 @@
         </div>
     </div>
 
-    <!-- 이미지 오버레이 모달 -->
     <div id="imgModal" class="modal-overlay" onclick="closeModal()">
         <div class="modal-container" id="modalContainer">
             <img id="modalImg" class="modal-content" src="" alt="확대 이미지">
