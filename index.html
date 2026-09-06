@@ -25,7 +25,7 @@
             position: relative;
         }
 
-        /* 0. 작가 프로필 섹션 */
+        /* 프로필 섹션 */
         .profile-card {
             width: 100%;
             background-color: #F5F3FE;
@@ -490,7 +490,6 @@
 </head>
 <body>
 
-    <!-- 프로필 섹션 -->
     <div class="profile-card">
         <div class="sparkle-profile-wrapper">
             <div class="sparkle-ring">
@@ -510,12 +509,10 @@
         </div>
     </div>
 
-    <!-- 일정 안내 -->
     <div class="schedule-box">
         주문 예약 진행 중입니다!
     </div>
 
-    <!-- 공지사항 -->
     <div class="notice-card">
         <div class="notice-badge">✦ 공지사항 ✦</div>
         <div class="notice-subtext">아래 사항을 숙지하지 않아 생기는 불이익은 책임지지 않습니다.</div>
@@ -526,229 +523,9 @@
         </ul>
     </div>
 
-    <!-- 신청양식 -->
     <div class="line-card">
         <div class="card-badge">신청양식</div>
         <div class="form-subtext">복사하셔서 작성해주세요!</div>
         <div class="form-list">
             <div class="form-item"><span class="form-num">1.</span><span class="form-input-placeholder">닉네임 / 입금자명 :</span></div>
-            <div class="form-item"><span class="form-num">2.</span><span class="form-input-placeholder">신청 유형 및 개수 :</span></div>
-            <div class="form-item"><span class="form-num">3.</span><span class="form-input-placeholder">참고 이미지 및 요청사항 :</span></div>
-            <div class="form-item"><span class="form-num">4.</span><span class="form-input-placeholder">이메일 주소 :</span></div>
-        </div>
-    </div>
-
-    <!-- 진행순서 -->
-    <div class="line-card">
-        <div class="card-badge">진행순서</div>
-        <div class="process-flow">
-            <div class="process-step"><span class="step-num">1</span>의뢰+견적</div>
-            <div class="process-step"><span class="step-num">2</span>결제</div>
-            <div class="process-step"><span class="step-num">3</span>러프확인</div>
-            <div class="process-step"><span class="step-num">4</span>완성본 전달</div>
-        </div>
-    </div>
-
-    <!-- [샘플 영역] 이모티콘 탭 단락 -->
-    <div class="outer-frame">
-        <div class="frame-header"><div class="frame-title-badge">이모티콘</div></div>
-        
-        <div class="tab-container" id="tab-group-1">
-            <button class="tab-btn active" onclick="switchTab('tab-group-1', 0)">글자티콘</button>
-            <button class="tab-btn" onclick="switchTab('tab-group-1', 1)">구독티콘</button>
-            <button class="tab-btn" onclick="switchTab('tab-group-1', 2)">움짤티콘</button>
-            <button class="tab-btn" onclick="switchTab('tab-group-1', 3)">뱃지</button>
-            <button class="tab-btn" onclick="switchTab('tab-group-1', 4)">OGQ</button>
-        </div>
-
-        <div class="tab-content-wrapper" id="content-group-1">
-            <!-- 1. 글자티콘 단락 -->
-            <div class="tab-panel active">
-                <div class="header-group"><div class="price-text">개당 0.7</div></div>
-                <div class="grid-responsive" id="grid-texticon-main"></div>
-                <div class="grid-responsive more-content" id="more-texticon"></div>
-                <button class="btn-more" id="btn-texticon" onclick="toggleMore('more-texticon', this)">더보기 ↓</button>
-            </div>
-
-            <!-- 2. 구독티콘 단락 -->
-            <div class="tab-panel">
-                <div class="header-group"><div class="price-text">개당 1.5</div></div>
-                <div class="grid-responsive" id="grid-subicon-main"></div>
-                <div class="grid-responsive more-content" id="more-subicon"></div>
-                <button class="btn-more" id="btn-subicon" onclick="toggleMore('more-subicon', this)">더보기 ↓</button>
-            </div>
-
-            <!-- 3. 움짤티콘 단락 -->
-            <div class="tab-panel">
-                <div class="header-group"><div class="price-text">개당 2.5 ~ 3.5</div></div>
-                <div class="grid-responsive" id="grid-gificon-main"></div>
-                <div class="grid-responsive more-content" id="more-gificon"></div>
-                <button class="btn-more" id="btn-gificon" onclick="toggleMore('more-gificon', this)">더보기 ↓</button>
-            </div>
-
-            <!-- 4. 뱃지 단락 -->
-            <div class="tab-panel">
-                <div class="header-group"><div class="price-text">개당 1.0</div></div>
-                <div class="grid-responsive" id="grid-badge-main"></div>
-                <div class="grid-responsive more-content" id="more-badge"></div>
-                <button class="btn-more" id="btn-badge" onclick="toggleMore('more-badge', this)">더보기 ↓</button>
-            </div>
-
-            <!-- 5. OGQ 단락 -->
-            <div class="tab-panel">
-                <div class="header-group"><div class="price-text">세트 50.0</div></div>
-                <div class="grid-responsive" id="grid-ogq-main"></div>
-                <div class="grid-responsive more-content" id="more-ogq"></div>
-                <button class="btn-more" id="btn-ogq" onclick="toggleMore('more-ogq', this)">더보기 ↓</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 이미지 모달 -->
-    <div id="imgModal" class="modal-overlay" onclick="closeModal()">
-        <div class="modal-container" id="modalContainer">
-            <img id="modalImg" class="modal-content" src="" alt="확대 이미지">
-        </div>
-    </div>
-
-    <script>
-        /*
-           ✦ [폴더 및 이미지 설정 영역]
-           영문 폴더 이름(path)과 올린 이미지 개수(total)를 입력하세요.
-        */
-        const config = {
-            defaultShowCount: 10, // 기본으로 보여줄 개수
-            items: [
-                {
-                    mainId: 'grid-texticon-main',
-                    moreId: 'more-texticon',
-                    btnId: 'btn-texticon',
-                    path: 'img/texticon', // 폴더명: img/texticon
-                    total: 50,           // 올려둔 이미지 파일 개수
-                    ext: 'png'
-                },
-                {
-                    mainId: 'grid-subicon-main',
-                    moreId: 'more-subicon',
-                    btnId: 'btn-subicon',
-                    path: 'img/subicon',  // 폴더명: img/subicon
-                    total: 30,
-                    ext: 'png'
-                },
-                {
-                    mainId: 'grid-gificon-main',
-                    moreId: 'more-gificon',
-                    btnId: 'btn-gificon',
-                    path: 'img/gificon',  // 폴더명: img/gificon
-                    total: 20,
-                    ext: 'gif'           // 움짤은 gif
-                },
-                {
-                    mainId: 'grid-badge-main',
-                    moreId: 'more-badge',
-                    btnId: 'btn-badge',
-                    path: 'img/badge',    // 폴더명: img/badge
-                    total: 40,
-                    ext: 'png'
-                },
-                {
-                    mainId: 'grid-ogq-main',
-                    moreId: 'more-ogq',
-                    btnId: 'btn-ogq',
-                    path: 'img/ogq',      // 폴더명: img/ogq
-                    total: 10,
-                    ext: 'png'
-                }
-            ]
-        };
-
-        // 이미지 자동 추가 스크립트
-        window.addEventListener('DOMContentLoaded', () => {
-            config.items.forEach(item => {
-                const mainContainer = document.getElementById(item.mainId);
-                const moreContainer = document.getElementById(item.moreId);
-                const btnMore = document.getElementById(item.btnId);
-
-                if (!mainContainer) return;
-
-                if (item.total <= config.defaultShowCount && btnMore) {
-                    btnMore.style.display = 'none';
-                }
-
-                for (let i = 1; i <= item.total; i++) {
-                    const targetContainer = (i <= config.defaultShowCount) ? mainContainer : moreContainer;
-
-                    const box = document.createElement('div');
-                    box.className = 'sample-box';
-                    box.onclick = function() { openModal(this); };
-
-                    const img = document.createElement('img');
-                    img.src = `${item.path}/${i}.${item.ext}`;
-                    img.alt = `샘플 ${i}`;
-
-                    // 이미지 경로가 잘못되었거나 파일이 없을 경우 박스 제거 (에러 방지)
-                    img.onerror = function() {
-                        box.remove();
-                    };
-
-                    box.appendChild(img);
-                    targetContainer.appendChild(box);
-                }
-            });
-        });
-
-        // 탭 전환 기능
-        function switchTab(groupId, index) {
-            const tabContainer = document.getElementById(groupId);
-            const buttons = tabContainer.querySelectorAll('.tab-btn');
-            const contentWrapper = document.getElementById('content-group-1');
-            const panels = contentWrapper.querySelectorAll('.tab-panel');
-
-            buttons.forEach((btn, i) => {
-                if (i === index) {
-                    btn.classList.add('active');
-                    panels[i].classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                    panels[i].classList.remove('active');
-                }
-            });
-        }
-
-        // 더보기 버튼 기능
-        function toggleMore(id, btn) {
-            const target = document.getElementById(id);
-            if (target.classList.contains('show')) {
-                target.classList.remove('show');
-                btn.innerText = '더보기 ↓';
-            } else {
-                target.classList.add('show');
-                btn.innerText = '접기 ↑';
-            }
-        }
-
-        // 모달 창 기능
-        function openModal(element) {
-            const img = element.querySelector('img');
-            if (img && img.getAttribute('src')) {
-                const modal = document.getElementById('imgModal');
-                const modalContainer = document.getElementById('modalContainer');
-                const modalImg = document.getElementById('modalImg');
-                
-                modalImg.src = img.src;
-
-                const rect = element.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const clickY = rect.top + scrollTop + (rect.height / 2);
-
-                modalContainer.style.top = clickY + 'px';
-                modal.style.display = 'block';
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('imgModal').style.display = 'none';
-        }
-    </script>
-</body>
-</html>
+            <div class="form-item"><span class="form
