@@ -14,7 +14,7 @@
 
         body {
             background-color: transparent;
-            padding: 20px 10px;
+            padding: 60px 10px 20px 10px; /* 사진이 위로 튀어나오므로 상단 여백 추가 */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,33 +25,89 @@
             position: relative;
         }
 
-        /* [추가] 프로필 섹션 스타일 */
+        /* 0. 프로필 영역 카드 (소개말 및 프로필을 담는 블록) */
         .profile-card {
             width: 100%;
+            background-color: #F5F3FE; /* 연한 보라 파스텔톤 블록 */
+            border: 2.5px solid #9D96F4;
+            border-radius: 20px;
+            padding: 0 24px 22px 24px;
             display: flex;
             align-items: center;
             gap: 20px;
-            padding: 10px 10px 10px 5px;
+            position: relative;
+            margin-top: 20px;
         }
 
-        .profile-img {
+        /* [추가] 반짝이는 별을 담는 감싸는 영역 (상단 경계선에 절반 걸침) */
+        .sparkle-profile-wrapper {
+            position: relative;
             width: 100px;
             height: 100px;
+            margin-top: -50px; /* 사진 절반을 카드 밖으로 올림 */
+            flex-shrink: 0;
+            z-index: 5;
+        }
+
+        /* [추가] 회전하는 별 테두리 */
+        .sparkle-ring {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 130px;
+            height: 130px;
+            pointer-events: none;
+            animation: rotateSparkle 10s linear infinite;
+            z-index: 10;
+        }
+
+        /* [추가] 별 입자 스타일 */
+        .sparkle-item {
+            position: absolute;
+            color: #B5ADFF;
+            font-size: 14px;
+            text-shadow: 0 0 6px rgba(181, 173, 255, 0.9);
+            animation: twinkle 1.5s infinite alternate ease-in-out;
+        }
+
+        .sparkle-1 { top: 5px; left: 25px; animation-delay: 0s; }
+        .sparkle-2 { top: 20px; right: 10px; font-size: 10px; animation-delay: 0.4s; }
+        .sparkle-3 { bottom: 25px; left: 10px; font-size: 11px; animation-delay: 0.8s; }
+        .sparkle-4 { bottom: 10px; right: 20px; animation-delay: 1.2s; }
+
+        /* [추가/수정] 경계선에 절반 걸쳐지는 프로필 이미지 */
+        .sparkle-profile-img {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #9D96F4;
-            flex-shrink: 0;
-            background-color: #F3F1FE;
+            border: 4px solid #FFFFFF; /* 테두리와 분리감을 주는 흰색 스트로크 */
+            box-shadow: 0 4px 10px rgba(157, 150, 244, 0.25);
+            background-color: #FFFFFF;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 별 회전 & 반짝임 Keyframes */
+        @keyframes rotateSparkle {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.7); }
+            100% { opacity: 1; transform: scale(1.3); }
         }
 
         .profile-info {
             display: flex;
             flex-direction: column;
             gap: 6px;
+            padding-top: 16px; /* 블록 내부 텍스트 위치 정돈 */
         }
 
         .profile-name {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 800;
             color: #333;
             display: flex;
@@ -77,7 +133,7 @@
             background-color: #FFFFFF;
         }
 
-        /* [수정] 공지사항 전용 카드 (그림자, 블러 완벽 제거) */
+        /* 공지사항 전용 카드 */
         .notice-card {
             width: 100%;
             background-color: #ECEAFE;
@@ -86,7 +142,6 @@
             position: relative;
         }
 
-        /* [수정] 공지사항 강조 배지 */
         .notice-badge {
             position: absolute;
             top: -18px;
@@ -117,7 +172,6 @@
             white-space: nowrap;
         }
 
-        /* 주문일정 양옆 2개 선 스타일 (double border) */
         .schedule-box {
             width: 100%;
             border-left: 7px double #9D96F4;
@@ -202,7 +256,6 @@
             color: #555;
         }
 
-        /* 진행순서 레이아웃 */
         .process-flow {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -252,7 +305,6 @@
             z-index: 2;
         }
 
-        /* 하단 샘플 프레임 배경색 (#ECEAFE) */
         .outer-frame {
             width: 100%;
             background-color: #ECEAFE;
@@ -406,7 +458,6 @@
             background-color: #E2DFFD;
         }
 
-        /* 이미지 오버레이 모달 */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -456,7 +507,16 @@
             .profile-card {
                 flex-direction: column;
                 text-align: center;
-                gap: 12px;
+                padding-top: 0;
+            }
+            .sparkle-profile-wrapper {
+                margin-top: -50px;
+            }
+            .profile-info {
+                padding-top: 0;
+            }
+            .profile-name {
+                justify-content: center;
             }
             .outer-frame {
                 padding: 16px 10px;
@@ -483,7 +543,16 @@
 <body>
 
     <div class="profile-card">
-        <img src="profile.png" alt="작가 프로필" class="profile-img">
+        <div class="sparkle-profile-wrapper">
+            <div class="sparkle-ring">
+                <span class="sparkle-item sparkle-1">✦</span>
+                <span class="sparkle-item sparkle-2">✧</span>
+                <span class="sparkle-item sparkle-3">✦</span>
+                <span class="sparkle-item sparkle-4">✧</span>
+            </div>
+            <img src="profile.png" alt="작가 프로필" class="sparkle-profile-img">
+        </div>
+        
         <div class="profile-info">
             <div class="profile-name">작가 닉네임 ✦</div>
             <div class="profile-text">
@@ -699,3 +768,217 @@
                 <div class="grid-responsive">
                     <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
                     <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <div class="grid-responsive more-content" id="more-balloon">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <button class="btn-more" onclick="toggleMore('more-balloon', this)">더보기 ↓</button>
+            </div>
+
+            <div class="tab-panel">
+                <div class="header-group">
+                    <div class="price-text">[ 인물 별도! 배경 가격만입니다! ]</div>
+                    <div class="sub-info">단순배경 1.0 ~ @ | 배경 3.0 ~ 6.0 ~ @</div>
+                </div>
+                <div class="grid-responsive">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <div class="grid-responsive more-content" id="more-screen">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <button class="btn-more" onclick="toggleMore('more-screen', this)">더보기 ↓</button>
+            </div>
+
+            <div class="tab-panel">
+                <div class="header-group"><div class="price-text">상단배너 / 채널아트</div></div>
+                <div class="grid-responsive">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <div class="grid-responsive more-content" id="more-topbanner">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <button class="btn-more" onclick="toggleMore('more-topbanner', this)">더보기 ↓</button>
+            </div>
+
+            <div class="tab-panel">
+                <div class="header-group">
+                    <div class="price-text">개당 3.0</div>
+                    <div class="sub-info">같은 그림에 글자만 변경 시 +0.7</div>
+                </div>
+                <div class="grid-responsive">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <div class="grid-responsive more-content" id="more-botbanner">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <button class="btn-more" onclick="toggleMore('more-botbanner', this)">더보기 ↓</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="outer-frame">
+        <div class="frame-header">
+            <div class="frame-title-badge">애니메이션</div>
+        </div>
+
+        <div class="tab-container" id="tab-group-3">
+            <button class="tab-btn active" onclick="switchTab('tab-group-3', 0)">채팅 아바타</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-3', 1)">후원움짤</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-3', 2)">짚톡</button>
+        </div>
+
+        <div class="tab-content-wrapper" id="content-group-3">
+            <div class="tab-panel active">
+                <div class="header-group"><div class="price-text">채팅 아바타</div></div>
+                <div class="grid-responsive">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <div class="grid-responsive more-content" id="more-chatavatar">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <button class="btn-more" onclick="toggleMore('more-chatavatar', this)">더보기 ↓</button>
+            </div>
+
+            <div class="tab-panel">
+                <div class="header-group"><div class="price-text">후원움짤</div></div>
+                <div class="grid-responsive">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <div class="grid-responsive more-content" id="more-donateanim">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <button class="btn-more" onclick="toggleMore('more-donateanim', this)">더보기 ↓</button>
+            </div>
+
+            <div class="tab-panel">
+                <div class="header-group"><div class="price-text">짚톡</div></div>
+                <div class="grid-responsive">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <div class="grid-responsive more-content" id="more-ziptok">
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                    <div class="sample-box" onclick="openModal(this)"></div><div class="sample-box" onclick="openModal(this)"></div>
+                </div>
+                <button class="btn-more" onclick="toggleMore('more-ziptok', this)">더보기 ↓</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="imgModal" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-container" id="modalContainer">
+            <img id="modalImg" class="modal-content" src="" alt="확대 이미지">
+        </div>
+    </div>
+
+    <script>
+        function switchTab(groupId, index) {
+            const tabContainer = document.getElementById(groupId);
+            const buttons = tabContainer.querySelectorAll('.tab-btn');
+            
+            let contentWrapper;
+            if (groupId === 'tab-group-1') contentWrapper = document.getElementById('content-group-1');
+            else if (groupId === 'tab-group-2') contentWrapper = document.getElementById('content-group-2');
+            else if (groupId === 'tab-group-3') contentWrapper = document.getElementById('content-group-3');
+                
+            const panels = contentWrapper.querySelectorAll('.tab-panel');
+
+            buttons.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('active');
+                    panels[i].classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                    panels[i].classList.remove('active');
+                }
+            });
+        }
+
+        function toggleMore(id, btn) {
+            const target = document.getElementById(id);
+            if (target.classList.contains('show')) {
+                target.classList.remove('show');
+                btn.innerText = '더보기 ↓';
+            } else {
+                target.classList.add('show');
+                btn.innerText = '접기 ↑';
+            }
+        }
+
+        function openModal(element) {
+            const img = element.querySelector('img');
+            if (img && img.getAttribute('src')) {
+                const modal = document.getElementById('imgModal');
+                const modalContainer = document.getElementById('modalContainer');
+                const modalImg = document.getElementById('modalImg');
+                
+                modalImg.src = img.src;
+
+                const rect = element.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const clickY = rect.top + scrollTop + (rect.height / 2);
+
+                modalContainer.style.top = clickY + 'px';
+                modal.style.display = 'block';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('imgModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
