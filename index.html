@@ -12,15 +12,14 @@
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
         }
 
-        /* 바깥 바탕 (뒤쪽 배경색 투명) */
         body {
             background-color: transparent;
             padding: 10px 5px;
             display: flex;
             justify-content: center;
+            position: relative; /* 상대 위치 기준점 */
         }
 
-        /* 메인 연보라 프레임 (그림자 제거) */
         .outer-frame {
             width: 100%;
             max-width: 900px;
@@ -68,7 +67,6 @@
             margin-top: 4px;
         }
 
-        /* 반응형 그리드 */
         .grid-responsive {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
@@ -127,27 +125,27 @@
             background-color: #E2E6FF;
         }
 
-        /* 현재 화면 위치 기준 확대 팝업 */
+        /* 절대 위치 기반 모달 팝업 */
         .modal {
             display: none;
-            position: fixed;
+            position: absolute;
             z-index: 99999;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.85);
+            padding: 12px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(4px);
             cursor: pointer;
         }
 
         .modal-content {
-            max-width: 90vw;
-            max-height: 85vh;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            max-width: 85vw;
+            max-height: 70vh;
+            border-radius: 8px;
             object-fit: contain;
+            display: block;
             animation: zoomIn 0.15s ease-out;
         }
 
@@ -156,7 +154,6 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        /* 반응형 가로 조절 */
         @media (max-width: 768px) {
             .grid-responsive {
                 grid-template-columns: repeat(8, 1fr);
@@ -331,7 +328,7 @@
 
 </div>
 
-<!-- 확대 팝업 모달 -->
+<!-- 클릭 위치 기반 확대 모달 -->
 <div id="imgModal" class="modal" onclick="closeModal()">
     <img id="modalImg" class="modal-content" src="" alt="확대 이미지">
 </div>
@@ -351,8 +348,19 @@
     function openModal(element) {
         const img = element.querySelector('img');
         if (img && img.getAttribute('src')) {
-            document.getElementById('modalImg').src = img.src;
-            document.getElementById('imgModal').style.display = 'flex';
+            const modal = document.getElementById('imgModal');
+            const modalImg = document.getElementById('modalImg');
+            
+            modalImg.src = img.src;
+
+            // 클릭된 박스의 절대 Y 위치 계산
+            const rect = element.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const clickY = rect.top + scrollTop + (rect.height / 2);
+
+            // 해당 위치로 모달 이동 및 표시
+            modal.style.top = clickY + 'px';
+            modal.style.display = 'block';
         }
     }
 
