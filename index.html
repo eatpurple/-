@@ -12,27 +12,33 @@
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
         }
 
+        /* 바깥 바탕 (기본 배경) */
         body {
-            background-color: #969AF3;
-            padding: 20px 10px;
+            background-color: #F4F5F9;
+            padding: 30px 15px;
             display: flex;
             justify-content: center;
         }
 
-        .container {
+        /* 전체를 감싸는 모서리가 둥근 연보라 프레임 */
+        .outer-frame {
             width: 100%;
-            max-width: 800px;
+            max-width: 820px;
+            background-color: #E8EBFD; /* 채도가 빠진 밝은 연보라색 */
+            border-radius: 28px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(160, 165, 220, 0.2);
             display: flex;
             flex-direction: column;
             gap: 25px;
         }
 
-        /* 공통 카드 스타일 */
+        /* 공통 흰색 카드 스타일 */
         .card {
             background-color: #FFFFFF;
-            border-radius: 16px;
+            border-radius: 18px;
             padding: 24px 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         }
 
         /* 타이틀 & 가격 헤더 */
@@ -43,11 +49,11 @@
 
         .badge-title {
             display: inline-block;
-            background-color: #969AF3;
+            background-color: #A3A8F5;
             color: #FFFFFF;
             font-size: 20px;
             font-weight: 700;
-            padding: 6px 20px;
+            padding: 6px 22px;
             border-radius: 20px;
             margin-bottom: 8px;
         }
@@ -73,7 +79,7 @@
 
         .sample-box {
             aspect-ratio: 1 / 1;
-            background-color: #F3F4F6;
+            background-color: #F8F9FA;
             border-radius: 6px;
             border: 1px dashed #D1D5DB;
             display: flex;
@@ -104,8 +110,8 @@
             max-width: 160px;
             margin: 16px auto 0 auto;
             padding: 8px 0;
-            background-color: #F0F1FF;
-            color: #5A60E8;
+            background-color: #F0F2FF;
+            color: #6C72E8;
             border: none;
             border-radius: 20px;
             font-size: 13px;
@@ -115,11 +121,15 @@
         }
 
         .btn-more:hover {
-            background-color: #E2E4FF;
+            background-color: #E2E6FF;
         }
 
-        /* 모바일 대응 (화면 폭이 좁아질 때 가독성 확보) */
+        /* 모바일 대응 */
         @media (max-width: 600px) {
+            .outer-frame {
+                padding: 16px 12px;
+                border-radius: 20px;
+            }
             .grid-9 {
                 grid-template-columns: repeat(5, 1fr);
             }
@@ -128,7 +138,8 @@
 </head>
 <body>
 
-<div class="container">
+<!-- 모서리가 둥근 연보라색 전체 프레임 -->
+<div class="outer-frame">
 
     <!-- 1. 글자티콘 -->
     <div class="card">
@@ -137,13 +148,11 @@
             <div class="price-text">개당 0.7</div>
         </div>
         <div class="grid-9">
-            <!-- 1~9번 기본 샘플 이미지 위치 -->
             <div class="sample-box"></div><div class="sample-box"></div><div class="sample-box"></div>
             <div class="sample-box"></div><div class="sample-box"></div><div class="sample-box"></div>
             <div class="sample-box"></div><div class="sample-box"></div><div class="sample-box"></div>
         </div>
         <div class="grid-9 more-content" id="more-texticon">
-            <!-- 더보기 클릭 시 열리는 추가 샘플 위치 -->
             <div class="sample-box"></div><div class="sample-box"></div><div class="sample-box"></div>
             <div class="sample-box"></div><div class="sample-box"></div><div class="sample-box"></div>
             <div class="sample-box"></div><div class="sample-box"></div><div class="sample-box"></div>
@@ -236,4 +245,3 @@
 
 </body>
 </html>
-
