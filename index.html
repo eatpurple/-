@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>커미션 상세페이지</title>
+    <title>상세페이지 샘플</title>
     <style>
         * {
             box-sizing: border-box;
@@ -372,12 +372,6 @@
             font-weight: 700;
         }
 
-        .sub-info {
-            font-size: 12.5px;
-            color: #777;
-            margin-top: 4px;
-        }
-
         /* 샘플 이미지 그리드 */
         .grid-responsive {
             display: grid;
@@ -408,7 +402,7 @@
             object-fit: cover;
         }
 
-        /* 더보기 접기 기능 */
+        /* 더보기 기능 */
         .more-content {
             display: none;
             margin-top: 6px;
@@ -438,7 +432,7 @@
             background-color: #E2DFFD;
         }
 
-        /* 모달 창 */
+        /* 이미지 클릭 시 모달 */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -505,21 +499,20 @@
                 <span class="sparkle-item sparkle-3">✦</span>
                 <span class="sparkle-item sparkle-4">✧</span>
             </div>
-            <img src="profile.png" alt="작가 프로필" class="sparkle-profile-img">
+            <img src="profile.png" alt="프로필" class="sparkle-profile-img" onerror="this.src='https://via.placeholder.com/100'">
         </div>
         <div class="profile-info">
             <div class="profile-name">작가 닉네임 ✦</div>
             <div class="profile-text">
-                안녕하세요! 동화 속 한 장면처럼 몽환적이고 귀여운 감성을 담아내는 작가입니다.<br>
-                캐릭터 하나하나에 생생한 마음을 눌러 담아, 오래 기억될 완성도 높고 전달력 있는 작업물을 만들어 드려요.
+                안녕하세요! 귀여운 감성을 담아내는 작가입니다.<br>
+                원하시는 느낌으로 최선을 다해 작업해 드립니다.
             </div>
         </div>
     </div>
 
     <!-- 일정 안내 -->
     <div class="schedule-box">
-        8월 주문 마감되었습니다<br>
-        9월 주문 받고 있어요!
+        주문 예약 진행 중입니다!
     </div>
 
     <!-- 공지사항 -->
@@ -527,11 +520,9 @@
         <div class="notice-badge">✦ 공지사항 ✦</div>
         <div class="notice-subtext">아래 사항을 숙지하지 않아 생기는 불이익은 책임지지 않습니다.</div>
         <ul class="check-list">
-            <li class="check-item">작업물의 저작권은 작가에게 있으며, 상업적 이용 및 2차가공은 불가합니다.</li>
+            <li class="check-item">작업물의 저작권은 작가에게 있으며, 2차가공은 불가합니다.</li>
             <li class="check-item">기본 작업 기간은 입금 확인일로부터 최대 OO일 소요됩니다.</li>
-            <li class="check-item">단순 변심으로 인한 환불은 불가합니다.</li>
-            <li class="check-item">완성본은 작성하신 메일로 PNG 파일 형태로 발송됩니다.</li>
-            <li class="check-item">완성된 작업물은 작가의 포트폴리오로 사용될 수 있습니다.</li>
+            <li class="check-item">완성본은 PNG(또는 GIF) 파일 형태로 발송됩니다.</li>
         </ul>
     </div>
 
@@ -542,9 +533,8 @@
         <div class="form-list">
             <div class="form-item"><span class="form-num">1.</span><span class="form-input-placeholder">닉네임 / 입금자명 :</span></div>
             <div class="form-item"><span class="form-num">2.</span><span class="form-input-placeholder">신청 유형 및 개수 :</span></div>
-            <div class="form-item"><span class="form-num">3.</span><span class="form-input-placeholder">캐릭터 자료 및 참고 이미지 :</span></div>
-            <div class="form-item"><span class="form-num">4.</span><span class="form-input-placeholder">원하시는 구도 / 요청사항 :</span></div>
-            <div class="form-item"><span class="form-num">5.</span><span class="form-input-placeholder">완성본 받으실 이메일 주소 :</span></div>
+            <div class="form-item"><span class="form-num">3.</span><span class="form-input-placeholder">참고 이미지 및 요청사항 :</span></div>
+            <div class="form-item"><span class="form-num">4.</span><span class="form-input-placeholder">이메일 주소 :</span></div>
         </div>
     </div>
 
@@ -554,14 +544,15 @@
         <div class="process-flow">
             <div class="process-step"><span class="step-num">1</span>의뢰+견적</div>
             <div class="process-step"><span class="step-num">2</span>결제</div>
-            <div class="process-step"><span class="step-num">3</span>러프(컨펌1회)</div>
-            <div class="process-step"><span class="step-num">4</span>완성</div>
+            <div class="process-step"><span class="step-num">3</span>러프확인</div>
+            <div class="process-step"><span class="step-num">4</span>완성본 전달</div>
         </div>
     </div>
 
-    <!-- [샘플 영역 1] 이모티콘 탭 -->
+    <!-- [샘플 영역] 이모티콘 탭 단락 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">이모티콘</div></div>
+        
         <div class="tab-container" id="tab-group-1">
             <button class="tab-btn active" onclick="switchTab('tab-group-1', 0)">글자티콘</button>
             <button class="tab-btn" onclick="switchTab('tab-group-1', 1)">구독티콘</button>
@@ -571,37 +562,41 @@
         </div>
 
         <div class="tab-content-wrapper" id="content-group-1">
-            <!-- 글자티콘 -->
+            <!-- 1. 글자티콘 단락 -->
             <div class="tab-panel active">
                 <div class="header-group"><div class="price-text">개당 0.7</div></div>
                 <div class="grid-responsive" id="grid-texticon-main"></div>
                 <div class="grid-responsive more-content" id="more-texticon"></div>
                 <button class="btn-more" id="btn-texticon" onclick="toggleMore('more-texticon', this)">더보기 ↓</button>
             </div>
-            <!-- 구독티콘 -->
+
+            <!-- 2. 구독티콘 단락 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.5</div></div>
                 <div class="grid-responsive" id="grid-subicon-main"></div>
                 <div class="grid-responsive more-content" id="more-subicon"></div>
                 <button class="btn-more" id="btn-subicon" onclick="toggleMore('more-subicon', this)">더보기 ↓</button>
             </div>
-            <!-- 움짤티콘 -->
+
+            <!-- 3. 움짤티콘 단락 -->
             <div class="tab-panel">
-                <div class="header-group"><div class="price-text">[미니 모션] 개당 2.5 / [기본] 개당 3.5</div></div>
+                <div class="header-group"><div class="price-text">개당 2.5 ~ 3.5</div></div>
                 <div class="grid-responsive" id="grid-gificon-main"></div>
                 <div class="grid-responsive more-content" id="more-gificon"></div>
                 <button class="btn-more" id="btn-gificon" onclick="toggleMore('more-gificon', this)">더보기 ↓</button>
             </div>
-            <!-- 뱃지 -->
+
+            <!-- 4. 뱃지 단락 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.0</div></div>
                 <div class="grid-responsive" id="grid-badge-main"></div>
                 <div class="grid-responsive more-content" id="more-badge"></div>
                 <button class="btn-more" id="btn-badge" onclick="toggleMore('more-badge', this)">더보기 ↓</button>
             </div>
-            <!-- OGQ -->
+
+            <!-- 5. OGQ 단락 -->
             <div class="tab-panel">
-                <div class="header-group"><div class="price-text">기본 50.0 / 움짤 100.0</div></div>
+                <div class="header-group"><div class="price-text">세트 50.0</div></div>
                 <div class="grid-responsive" id="grid-ogq-main"></div>
                 <div class="grid-responsive more-content" id="more-ogq"></div>
                 <button class="btn-more" id="btn-ogq" onclick="toggleMore('more-ogq', this)">더보기 ↓</button>
@@ -617,31 +612,26 @@
     </div>
 
     <script>
-        /* 
-           ========================================================
-           ✦ [이미지 자동 생성 설정 영역]
-           여기서 각 탭별 이미지 개수만 수정해주시면 알아서 렌더링됩니다!
-           ========================================================
+        /*
+           ✦ [폴더 및 이미지 설정 영역]
+           영문 폴더 이름(path)과 올린 이미지 개수(total)를 입력하세요.
         */
         const config = {
-            // 메인 화면에 기본으로 보여줄 이미지 개수 (기본 10개)
-            defaultShowCount: 10,
-            
-            // 각 탭별 전체 이미지 수량 지정
+            defaultShowCount: 10, // 기본으로 보여줄 개수
             items: [
                 {
                     mainId: 'grid-texticon-main',
                     moreId: 'more-texticon',
                     btnId: 'btn-texticon',
-                    path: 'img/texticon', // 폴더 경로
-                    total: 50,             // 보유 이미지 총 개수 (필요한 만큼 숫자 변경)
-                    ext: 'png'             // 파일 확장자 (png 또는 gif)
+                    path: 'img/texticon', // 폴더명: img/texticon
+                    total: 50,           // 올려둔 이미지 파일 개수
+                    ext: 'png'
                 },
                 {
                     mainId: 'grid-subicon-main',
                     moreId: 'more-subicon',
                     btnId: 'btn-subicon',
-                    path: 'img/subicon',
+                    path: 'img/subicon',  // 폴더명: img/subicon
                     total: 30,
                     ext: 'png'
                 },
@@ -649,15 +639,15 @@
                     mainId: 'grid-gificon-main',
                     moreId: 'more-gificon',
                     btnId: 'btn-gificon',
-                    path: 'img/gificon',
+                    path: 'img/gificon',  // 폴더명: img/gificon
                     total: 20,
-                    ext: 'gif' // 움짤 탭은 gif로 지정
+                    ext: 'gif'           // 움짤은 gif
                 },
                 {
                     mainId: 'grid-badge-main',
                     moreId: 'more-badge',
                     btnId: 'btn-badge',
-                    path: 'img/badge',
+                    path: 'img/badge',    // 폴더명: img/badge
                     total: 40,
                     ext: 'png'
                 },
@@ -665,14 +655,14 @@
                     mainId: 'grid-ogq-main',
                     moreId: 'more-ogq',
                     btnId: 'btn-ogq',
-                    path: 'img/ogq',
+                    path: 'img/ogq',      // 폴더명: img/ogq
                     total: 10,
                     ext: 'png'
                 }
             ]
         };
 
-        // 페이지 로드시 자동 실행되는 자바스크립트 함수
+        // 이미지 자동 추가 스크립트
         window.addEventListener('DOMContentLoaded', () => {
             config.items.forEach(item => {
                 const mainContainer = document.getElementById(item.mainId);
@@ -681,7 +671,6 @@
 
                 if (!mainContainer) return;
 
-                // 이미지가 defaultShowCount보다 적으면 '더보기' 버튼 자동 숨김
                 if (item.total <= config.defaultShowCount && btnMore) {
                     btnMore.style.display = 'none';
                 }
@@ -697,7 +686,7 @@
                     img.src = `${item.path}/${i}.${item.ext}`;
                     img.alt = `샘플 ${i}`;
 
-                    // 이미지가 서버/폴더에 없을 시 그리드 박스 자체를 없애서 엑박 방지
+                    // 이미지 경로가 잘못되었거나 파일이 없을 경우 박스 제거 (에러 방지)
                     img.onerror = function() {
                         box.remove();
                     };
@@ -738,7 +727,7 @@
             }
         }
 
-        // 모달 조작 기능
+        // 모달 창 기능
         function openModal(element) {
             const img = element.querySelector('img');
             if (img && img.getAttribute('src')) {
