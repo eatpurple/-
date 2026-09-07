@@ -675,129 +675,131 @@
         </div>
     </div>
 
-    <div id="imgModal" class="modal-overlay" onclick="closeModal()">
-        <div class="modal-container" id="modalContainer">
-            <img id="modalImg" class="modal-content" src="" alt="확대 이미지">
-        </div>
-    </div>
+<script>
+    const baseUrl = 'https://cdn.jsdelivr.net/gh/eatpurple/eatpurple@main/';
 
-    <script>
-        const baseUrl = 'https://cdn.jsdelivr.net/gh/eatpurple/eatpurple@main/';
+    const config = {
+        defaultShowCount: 10,
+        items: [
+            /* 1단락 */
+            { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', total: 50 },
+            { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon', total: 20 }, // texticongif -> texticon으로 수정
+            { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon', total: 30 },
+            { mainId: 'grid-gificon-main', moreId: 'more-gificon', btnId: 'btn-gificon', path: 'img/gifcon', total: 20 }, // gificon 폴더명에 맞춤
+            { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge', total: 40 },
+            { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq', total: 20 },
+            
+            /* 2단락 */
+            { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen', total: 20 },
+            { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner', total: 20 },
+            { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner', total: 20 },
+            
+            /* 3단락 */
+            { mainId: 'grid-balloon-main', moreId: 'more-balloon', btnId: 'btn-balloon', path: 'img/balloon', total: 20 },
+            { mainId: 'grid-gifanim-main', moreId: 'more-gifanim', btnId: 'btn-gifanim', path: 'img/gifanim', total: 20 },
+            { mainId: 'grid-ziptok-main', moreId: 'more-ziptok', btnId: 'btn-ziptok', path: 'img/ziptok', total: 20 },
+            { mainId: 'grid-avatar-main', moreId: 'more-avatar', btnId: 'btn-avatar', path: 'img/avatar', total: 20 }
+        ]
+    };
 
-        const config = {
-            defaultShowCount: 10,
-            items: [
-                /* 1단락 */
-                { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: baseUrl + 'img/texticon', total: 50 },
-                { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: baseUrl + 'img/texticongif', total: 20 },
-                { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: baseUrl + 'img/subicon', total: 30 },
-                { mainId: 'grid-gificon-main', moreId: 'more-gificon', btnId: 'btn-gificon', path: baseUrl + 'img/gificon', total: 20 },
-                { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: baseUrl + 'img/badge', total: 40 },
-                { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: baseUrl + 'img/ogq', total: 20 },
-                
-                /* 2단락 */
-                { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: baseUrl + 'img/screen', total: 20 },
-                { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: baseUrl + 'img/topbanner', total: 20 },
-                { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: baseUrl + 'img/botbanner', total: 20 },
-                
-                /* 3단락 */
-                { mainId: 'grid-balloon-main', moreId: 'more-balloon', btnId: 'btn-balloon', path: baseUrl + 'img/balloon', total: 20 },
-                { mainId: 'grid-gifanim-main', moreId: 'more-gifanim', btnId: 'btn-gifanim', path: baseUrl + 'img/gifanim', total: 20 },
-                { mainId: 'grid-ziptok-main', moreId: 'more-ziptok', btnId: 'btn-ziptok', path: baseUrl + 'img/ziptok', total: 20 },
-                { mainId: 'grid-avatar-main', moreId: 'more-avatar', btnId: 'btn-avatar', path: baseUrl + 'img/avatar', total: 20 }
-            ]
-        };
+    function loadImages() {
+        config.items.forEach(item => {
+            const mainContainer = document.getElementById(item.mainId);
+            const moreContainer = document.getElementById(item.moreId);
+            const btnMore = document.getElementById(item.btnId);
 
-        // PNG -> GIF 자동 감지 로직
-        window.addEventListener('DOMContentLoaded', () => {
-            config.items.forEach(item => {
-                const mainContainer = document.getElementById(item.mainId);
-                const moreContainer = document.getElementById(item.moreId);
-                const btnMore = document.getElementById(item.btnId);
+            if (!mainContainer) return;
 
-                if (!mainContainer) return;
+            if (item.total <= config.defaultShowCount && btnMore) {
+                btnMore.style.display = 'none';
+            }
 
-                if (item.total <= config.defaultShowCount && btnMore) {
-                    btnMore.style.display = 'none';
-                }
+            for (let i = 1; i <= item.total; i++) {
+                const targetContainer = (i <= config.defaultShowCount) ? mainContainer : moreContainer;
 
-                for (let i = 1; i <= item.total; i++) {
-                    const targetContainer = (i <= config.defaultShowCount) ? mainContainer : moreContainer;
+                const box = document.createElement('div');
+                box.className = 'sample-box';
+                box.onclick = function() { openModal(this); };
 
-                    const box = document.createElement('div');
-                    box.className = 'sample-box';
-                    box.onclick = function() { openModal(this); };
+                const img = document.createElement('img');
+                const fullPath = baseUrl + item.path + '/' + i;
+                img.src = fullPath + '.PNG';
+                img.alt = `샘플 ${i}`;
 
-                    const img = document.createElement('img');
-                    img.src = `${item.path}/${i}.PNG`;
-                    img.alt = `샘플 ${i}`;
+                // PNG 실패 시 GIF 시도, GIF도 실패 시 박스 제거
+                img.onerror = function() {
+                    if (this.src.endsWith('.PNG')) {
+                        this.src = fullPath + '.GIF';
+                    } else {
+                        box.remove();
+                    }
+                };
 
-                    img.onerror = function() {
-                        if (this.src.endsWith('.PNG')) {
-                            this.src = `${item.path}/${i}.GIF`;
-                        } else {
-                            box.remove();
-                        }
-                    };
-
-                    box.appendChild(img);
-                    targetContainer.appendChild(box);
-                }
-            });
+                box.appendChild(img);
+                targetContainer.appendChild(box);
+            }
         });
+    }
 
-        // 탭 전환
-        function switchTab(groupId, contentId, index) {
-            const tabContainer = document.getElementById(groupId);
-            const buttons = tabContainer.querySelectorAll('.tab-btn');
-            const contentWrapper = document.getElementById(contentId);
-            const panels = contentWrapper.querySelectorAll('.tab-panel');
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadImages);
+    } else {
+        loadImages();
+    }
 
-            buttons.forEach((btn, i) => {
-                if (i === index) {
-                    btn.classList.add('active');
-                    panels[i].classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                    panels[i].classList.remove('active');
-                }
-            });
-        }
+    // 탭 전환
+    function switchTab(groupId, contentId, index) {
+        const tabContainer = document.getElementById(groupId);
+        const buttons = tabContainer.querySelectorAll('.tab-btn');
+        const contentWrapper = document.getElementById(contentId);
+        const panels = contentWrapper.querySelectorAll('.tab-panel');
 
-        // 더보기 토글
-        function toggleMore(id, btn) {
-            const target = document.getElementById(id);
-            if (target.classList.contains('show')) {
-                target.classList.remove('show');
-                btn.innerText = '더보기 ↓';
+        buttons.forEach((btn, i) => {
+            if (i === index) {
+                btn.classList.add('active');
+                panels[i].classList.add('active');
             } else {
-                target.classList.add('show');
-                btn.innerText = '접기 ↑';
+                btn.classList.remove('active');
+                panels[i].classList.remove('active');
             }
+        });
+    }
+
+    // 더보기 토글
+    function toggleMore(id, btn) {
+        const target = document.getElementById(id);
+        if (target.classList.contains('show')) {
+            target.classList.remove('show');
+            btn.innerText = '더보기 ↓';
+        } else {
+            target.classList.add('show');
+            btn.innerText = '접기 ↑';
         }
+    }
 
-        // 모달 기능
-        function openModal(element) {
-            const img = element.querySelector('img');
-            if (img && img.getAttribute('src')) {
-                const modal = document.getElementById('imgModal');
-                const modalContainer = document.getElementById('modalContainer');
-                const modalImg = document.getElementById('modalImg');
-                
-                modalImg.src = img.src;
+    // 모달 기능
+    function openModal(element) {
+        const img = element.querySelector('img');
+        if (img && img.getAttribute('src')) {
+            const modal = document.getElementById('imgModal');
+            const modalContainer = document.getElementById('modalContainer');
+            const modalImg = document.getElementById('modalImg');
+            
+            modalImg.src = img.src;
 
-                const rect = element.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const clickY = rect.top + scrollTop + (rect.height / 2);
+            const rect = element.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const clickY = rect.top + scrollTop + (rect.height / 2);
 
-                modalContainer.style.top = clickY + 'px';
-                modal.style.display = 'block';
-            }
+            modalContainer.style.top = clickY + 'px';
+            modal.style.display = 'block';
         }
+    }
 
-        function closeModal() {
-            document.getElementById('imgModal').style.display = 'none';
-        }
-    </script>
+    function closeModal() {
+        document.getElementById('imgModal').style.display = 'none';
+    }
+</script>
+
 </body>
 </html>
