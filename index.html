@@ -7,8 +7,8 @@
         defaultShowCount: 10,
         items: [
             /* 1단락 */
-            { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', splitType: 'first' },
-            { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon', splitType: 'second' },
+            { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', filterExt: 'png' },
+            { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon', filterExt: 'gif' },
             { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon' },
             { mainId: 'grid-gificon-main', moreId: 'more-gificon', btnId: 'btn-gificon', path: 'img/gifcon' },
             { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge' },
@@ -27,7 +27,6 @@
         ]
     };
 
-    // GitHub API 폴더 캐시 (같은 폴더 두 번 불러와서 일어나는 중복 방지)
     const folderCache = {};
 
     async function fetchAndRenderImages() {
@@ -39,7 +38,6 @@
             if (!mainContainer) continue;
 
             try {
-                // API 데이터 가져오기 및 캐싱
                 if (!folderCache[item.path]) {
                     const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${item.path}?ref=${branch}`;
                     const response = await fetch(apiUrl);
@@ -57,13 +55,11 @@
                     /\.(png|jpe?g|gif|webp)$/i.test(file.name)
                 );
 
-                // 글자티콘 중복 분리 처리 (상/하단 나눠 담기)
-                if (item.splitType === 'first') {
-                    const half = Math.ceil(imageFiles.length / 2);
-                    imageFiles = imageFiles.slice(0, half);
-                } else if (item.splitType === 'second') {
-                    const half = Math.ceil(imageFiles.length / 2);
-                    imageFiles = imageFiles.slice(half);
+                // 글자티콘 확장자별 분리 (PNG / GIF)
+                if (item.filterExt) {
+                    imageFiles = imageFiles.filter(file => 
+                        file.name.toLowerCase().endsWith('.' + item.filterExt)
+                    );
                 }
 
                 if (imageFiles.length <= config.defaultShowCount && btnMore) {
