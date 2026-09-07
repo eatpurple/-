@@ -1,5 +1,4 @@
 <style>
-    /* 기본 레이아웃 및 탭 스타일 */
     .portfolio-container {
         width: 100%;
         max-width: 1200px;
@@ -26,9 +25,7 @@
         transition: all 0.2s ease;
     }
 
-    .tab-btn:hover {
-        background-color: #f1f5f9;
-    }
+    .tab-btn:hover { background-color: #f1f5f9; }
 
     .tab-btn.active {
         background-color: #7c3aed;
@@ -36,19 +33,11 @@
         border-color: #7c3aed;
     }
 
-    .tab-content {
-        margin-bottom: 40px;
-    }
+    .tab-content { margin-bottom: 40px; }
 
-    .tab-panel {
-        display: none;
-    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
 
-    .tab-panel.active {
-        display: block;
-    }
-
-    /* 그리드 및 샘플 박스 */
     .sample-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -62,9 +51,7 @@
         margin-top: 12px;
     }
 
-    .more-grid.show {
-        display: grid;
-    }
+    .more-grid.show { display: grid; }
 
     .sample-box {
         position: relative;
@@ -87,13 +74,6 @@
         height: 100%;
         object-fit: contain;
         display: block;
-    }
-
-    .section-title {
-        font-size: 16px;
-        font-weight: 700;
-        margin: 20px 0 10px 0;
-        color: #1e293b;
     }
 
     .more-btn {
@@ -161,24 +141,26 @@
 
 <div class="portfolio-container">
 
-    <!-- 1단락 탭 (티콘 / 뱃지 / OGQ) -->
+    <!-- 1단락 탭 (글자티콘 / 움짤 글자티콘 / 구독티콘 / 움짤티콘 / 구독뱃지 / OGQ) -->
     <div class="tab-menu" id="tab-group-1">
         <button class="tab-btn active" onclick="switchTab('tab-group-1', 'content-group-1', 0)">글자티콘</button>
-        <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 1)">구독티콘</button>
-        <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 2)">움짤티콘</button>
-        <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 3)">구독뱃지</button>
-        <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 4)">OGQ</button>
+        <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 1)">움짤 글자티콘</button>
+        <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 2)">구독티콘</button>
+        <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 3)">움짤티콘</button>
+        <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 4)">구독뱃지</button>
+        <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 5)">OGQ</button>
     </div>
 
     <div class="tab-content" id="content-group-1">
-        <!-- 글자티콘 -->
+        <!-- 글자티콘 (PNG) -->
         <div class="tab-panel active">
-            <div class="section-title">일반 글자티콘 (PNG)</div>
             <div class="sample-grid" id="grid-texticon-main"></div>
             <div class="more-grid" id="more-texticon"></div>
             <button class="more-btn" id="btn-texticon" onclick="toggleMore('more-texticon', this)">더보기 ↓</button>
+        </div>
 
-            <div class="section-title">움직이는 글자티콘 (GIF)</div>
+        <!-- 움짤 글자티콘 (GIF) - 독립된 탭으로 분리 -->
+        <div class="tab-panel">
             <div class="sample-grid" id="grid-texticon-gif-main"></div>
             <div class="more-grid" id="more-texticon-gif"></div>
             <button class="more-btn" id="btn-texticon-gif" onclick="toggleMore('more-texticon-gif', this)">더보기 ↓</button>
@@ -221,21 +203,16 @@
     </div>
 
     <div class="tab-content" id="content-group-2">
-        <!-- 방송화면 -->
         <div class="tab-panel active">
             <div class="sample-grid" id="grid-screen-main"></div>
             <div class="more-grid" id="more-screen"></div>
             <button class="more-btn" id="btn-screen" onclick="toggleMore('more-screen', this)">더보기 ↓</button>
         </div>
-
-        <!-- 상단배너 -->
         <div class="tab-panel">
             <div class="sample-grid" id="grid-topbanner-main"></div>
             <div class="more-grid" id="more-topbanner"></div>
             <button class="more-btn" id="btn-topbanner" onclick="toggleMore('more-topbanner', this)">더보기 ↓</button>
         </div>
-
-        <!-- 하단배너 -->
         <div class="tab-panel">
             <div class="sample-grid" id="grid-botbanner-main"></div>
             <div class="more-grid" id="more-botbanner"></div>
@@ -252,28 +229,21 @@
     </div>
 
     <div class="tab-content" id="content-group-3">
-        <!-- 시그니처풍선 -->
         <div class="tab-panel active">
             <div class="sample-grid" id="grid-balloon-main"></div>
             <div class="more-grid" id="more-balloon"></div>
             <button class="more-btn" id="btn-balloon" onclick="toggleMore('more-balloon', this)">더보기 ↓</button>
         </div>
-
-        <!-- 후원애니(gif) -->
         <div class="tab-panel">
             <div class="sample-grid" id="grid-gifanim-main"></div>
             <div class="more-grid" id="more-gifanim"></div>
             <button class="more-btn" id="btn-gifanim" onclick="toggleMore('more-gifanim', this)">더보기 ↓</button>
         </div>
-
-        <!-- 집톡 -->
         <div class="tab-panel">
             <div class="sample-grid" id="grid-ziptok-main"></div>
             <div class="more-grid" id="more-ziptok"></div>
             <button class="more-btn" id="btn-ziptok" onclick="toggleMore('more-ziptok', this)">더보기 ↓</button>
         </div>
-
-        <!-- 채팅 아바타 -->
         <div class="tab-panel">
             <div class="sample-grid" id="grid-avatar-main"></div>
             <div class="more-grid" id="more-avatar"></div>
@@ -294,32 +264,32 @@
 <script>
     const baseUrl = 'https://raw.githubusercontent.com/eatpurple/eatpurple/main/';
 
+    // 각 카테고리별 올린 이미지 개수 (올려두신 수만큼 숫자 설정)
     const config = {
         defaultShowCount: 10,
-        maxCheck: 50,
         items: [
             /* 1단락 */
-            { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', ext: 'png' },
-            { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon', ext: 'gif' },
-            { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon', ext: 'png' },
-            { mainId: 'grid-gificon-main', moreId: 'more-gificon', btnId: 'btn-gificon', path: 'img/gifcon', ext: 'gif' },
-            { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge', ext: 'png' },
-            { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq', ext: 'png' },
+            { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', ext: 'png', count: 20 },
+            { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon', ext: 'gif', count: 20 },
+            { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon', ext: 'png', count: 20 },
+            { mainId: 'grid-gificon-main', moreId: 'more-gificon', btnId: 'btn-gificon', path: 'img/gifcon', ext: 'gif', count: 20 },
+            { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge', ext: 'png', count: 20 },
+            { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq', ext: 'png', count: 20 },
             
             /* 2단락 */
-            { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen', ext: 'png' },
-            { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner', ext: 'png' },
-            { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner', ext: 'png' },
+            { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen', ext: 'png', count: 20 },
+            { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner', ext: 'png', count: 20 },
+            { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner', ext: 'png', count: 20 },
             
             /* 3단락 */
-            { mainId: 'grid-balloon-main', moreId: 'more-balloon', btnId: 'btn-balloon', path: 'img/balloon', ext: 'png' },
-            { mainId: 'grid-gifanim-main', moreId: 'more-gifanim', btnId: 'btn-gifanim', path: 'img/gifanim', ext: 'gif' },
-            { mainId: 'grid-ziptok-main', moreId: 'more-ziptok', btnId: 'btn-ziptok', path: 'img/ziptok', ext: 'png' },
-            { mainId: 'grid-avatar-main', moreId: 'more-avatar', btnId: 'btn-avatar', path: 'img/avatar', ext: 'png' }
+            { mainId: 'grid-balloon-main', moreId: 'more-balloon', btnId: 'btn-balloon', path: 'img/balloon', ext: 'png', count: 20 },
+            { mainId: 'grid-gifanim-main', moreId: 'more-gifanim', btnId: 'btn-gifanim', path: 'img/gifanim', ext: 'gif', count: 20 },
+            { mainId: 'grid-ziptok-main', moreId: 'more-ziptok', btnId: 'btn-ziptok', path: 'img/ziptok', ext: 'png', count: 20 },
+            { mainId: 'grid-avatar-main', moreId: 'more-avatar', btnId: 'btn-avatar', path: 'img/avatar', ext: 'png', count: 20 }
         ]
     };
 
-    function loadImages() {
+    function renderImages() {
         config.items.forEach(item => {
             const mainContainer = document.getElementById(item.mainId);
             const moreContainer = document.getElementById(item.moreId);
@@ -327,47 +297,39 @@
 
             if (!mainContainer) return;
 
-            let loadedCount = 0;
+            // 기본 표시 개수보다 이미지가 적거나 같으면 '더보기' 버튼 숨김
+            if (item.count <= config.defaultShowCount && btnMore) {
+                btnMore.style.display = 'none';
+            } else if (btnMore) {
+                btnMore.style.display = 'block';
+            }
 
-            for (let i = 1; i <= config.maxCheck; i++) {
-                const img = new Image();
-                const src = `${baseUrl}${item.path}/${i}.${item.ext}`;
+            for (let i = 1; i <= item.count; i++) {
+                const targetContainer = (i <= config.defaultShowCount) ? mainContainer : moreContainer;
 
-                img.onload = function() {
-                    loadedCount++;
-                    const targetContainer = (loadedCount <= config.defaultShowCount) ? mainContainer : moreContainer;
+                const box = document.createElement('div');
+                box.className = 'sample-box';
+                box.onclick = function() { openModal(this); };
 
-                    const box = document.createElement('div');
-                    box.className = 'sample-box';
-                    box.onclick = function() { openModal(this); };
+                const img = document.createElement('img');
+                img.src = `${baseUrl}${item.path}/${i}.${item.ext}`;
+                img.alt = `샘플 ${i}`;
 
-                    const displayImg = document.createElement('img');
-                    displayImg.src = src;
-                    displayImg.alt = `샘플 ${i}`;
-
-                    box.appendChild(displayImg);
-                    targetContainer.appendChild(box);
-
-                    if (loadedCount > config.defaultShowCount && btnMore) {
-                        btnMore.style.display = 'block';
-                    }
-                };
-
+                // 에러 발생 시 박스 숨김
                 img.onerror = function() {
-                    if (loadedCount <= config.defaultShowCount && btnMore) {
-                        btnMore.style.display = 'none';
-                    }
+                    box.style.display = 'none';
                 };
 
-                img.src = src;
+                box.appendChild(img);
+                targetContainer.appendChild(box);
             }
         });
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadImages);
+        document.addEventListener('DOMContentLoaded', renderImages);
     } else {
-        loadImages();
+        renderImages();
     }
 
     // 탭 전환
