@@ -510,16 +510,17 @@
     </div>
 
     <div class="schedule-box">
-        주문 예약 진행 중입니다!
+        ✦ 마감 일정 및 작업 예약 문의는 문의 채널로 연락 주세요! ✦
     </div>
 
     <div class="notice-card">
         <div class="notice-badge">✦ 공지사항 ✦</div>
         <div class="notice-subtext">아래 사항을 숙지하지 않아 생기는 불이익은 책임지지 않습니다.</div>
         <ul class="check-list">
-            <li class="check-item">작업물의 저작권은 작가에게 있으며, 2차가공은 불가합니다.</li>
-            <li class="check-item">기본 작업 기간은 입금 확인일로부터 최대 OO일 소요됩니다.</li>
-            <li class="check-item">완성본은 PNG(또는 GIF) 파일 형태로 발송됩니다.</li>
+            <li class="check-item">모든 작업물의 저작권은 작가(잇퍼플)에게 있으며, 임의 2차가공, 수정, 재배포는 금지됩니다.</li>
+            <li class="check-item">기본 작업 기간은 입금 확인일 및 스케줄 확정일로부터 시작됩니다.</li>
+            <li class="check-item">완성본은 투명 배경 PNG 또는 GIF 파일 형태로 발송됩니다.</li>
+            <li class="check-item">신청 양식을 작성하여 전달 주시면 더욱 빠른 상담이 가능합니다.</li>
         </ul>
     </div>
 
@@ -545,24 +546,17 @@
     </div>
 
     <div class="outer-frame">
-        <div class="frame-header"><div class="frame-title-badge">이모티콘</div></div>
+        <div class="frame-header"><div class="frame-title-badge">이모티콘 & OGQ</div></div>
         
         <div class="tab-container" id="tab-group-1">
-            <button class="tab-btn active" onclick="switchTab('tab-group-1', 'content-group-1', 0)">글자티콘</button>
-            <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 1)">구독티콘</button>
-            <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 2)">움짤티콘</button>
-            <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 3)">뱃지</button>
-            <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 4)">OGQ</button>
+            <button class="tab-btn active" onclick="switchTab('tab-group-1', 'content-group-1', 0)">구독티콘</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 1)">움짤티콘</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 2)">뱃지</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 3)">OGQ</button>
         </div>
 
         <div class="tab-content-wrapper" id="content-group-1">
             <div class="tab-panel active">
-                <div class="header-group"><div class="price-text">개당 0.7</div></div>
-                <div class="grid-responsive" id="grid-texticon-main"></div>
-                <div class="grid-responsive more-content" id="more-texticon"></div>
-                <button class="btn-more" id="btn-texticon" onclick="toggleMore('more-texticon', this)">더보기 ↓</button>
-            </div>
-            <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.5</div></div>
                 <div class="grid-responsive" id="grid-subicon-main"></div>
                 <div class="grid-responsive more-content" id="more-subicon"></div>
@@ -593,9 +587,10 @@
         <div class="frame-header"><div class="frame-title-badge">방송화면 & 배너</div></div>
         
         <div class="tab-container" id="tab-group-2">
-            <button class="tab-btn active" onclick="switchTab('tab-group-2', 'content-group-2', 0)">방송화면</button>
-            <button class="tab-btn" onclick="switchTab('tab-group-2', 'content-group-2', 1)">상단배너</button>
+            <button class="tab-btn active" onclick="switchTab('tab-group-2', 'content-group-2', 0)">방송화면 / 대기화면</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-2', 'content-group-2', 1)">상단배너 / 채널아트</button>
             <button class="tab-btn" onclick="switchTab('tab-group-2', 'content-group-2', 2)">하단배너</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-2', 'content-group-2', 3)">시그니처풍선</button>
         </div>
 
         <div class="tab-content-wrapper" id="content-group-2">
@@ -617,23 +612,36 @@
                 <div class="grid-responsive more-content" id="more-botbanner"></div>
                 <button class="btn-more" id="btn-botbanner" onclick="toggleMore('more-botbanner', this)">더보기 ↓</button>
             </div>
-        </div>
-    </div>
-
-    <div class="outer-frame">
-        <div class="frame-header"><div class="frame-title-badge">시그니처 & 기타</div></div>
-        
-        <div class="tab-container" id="tab-group-3">
-            <button class="tab-btn active" onclick="switchTab('tab-group-3', 'content-group-3', 0)">시그니처풍선</button>
-            <button class="tab-btn" onclick="switchTab('tab-group-3', 'content-group-3', 1)">채팅 아바타</button>
-        </div>
-
-        <div class="tab-content-wrapper" id="content-group-3">
-            <div class="tab-panel active">
+            <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 2.0</div></div>
                 <div class="grid-responsive" id="grid-balloon-main"></div>
                 <div class="grid-responsive more-content" id="more-balloon"></div>
                 <button class="btn-more" id="btn-balloon" onclick="toggleMore('more-balloon', this)">더보기 ↓</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="outer-frame">
+        <div class="frame-header"><div class="frame-title-badge">움직이는 애니메이션 & 기타</div></div>
+        
+        <div class="tab-container" id="tab-group-3">
+            <button class="tab-btn active" onclick="switchTab('tab-group-3', 'content-group-3', 0)">후원움짤</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-3', 'content-group-3', 1)">짚톡</button>
+            <button class="tab-btn" onclick="switchTab('tab-group-3', 'content-group-3', 2)">채팅 아바타</button>
+        </div>
+
+        <div class="tab-content-wrapper" id="content-group-3">
+            <div class="tab-panel active">
+                <div class="header-group"><div class="price-text">개당 5.0 ~</div></div>
+                <div class="grid-responsive" id="grid-gifanim-main"></div>
+                <div class="grid-responsive more-content" id="more-gifanim"></div>
+                <button class="btn-more" id="btn-gifanim" onclick="toggleMore('more-gifanim', this)">더보기 ↓</button>
+            </div>
+            <div class="tab-panel">
+                <div class="header-group"><div class="price-text">개당 3.0</div></div>
+                <div class="grid-responsive" id="grid-ziptok-main"></div>
+                <div class="grid-responsive more-content" id="more-ziptok"></div>
+                <button class="btn-more" id="btn-ziptok" onclick="toggleMore('more-ziptok', this)">더보기 ↓</button>
             </div>
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 4.0</div></div>
@@ -655,22 +663,25 @@
             defaultShowCount: 10,
             items: [
                 /* 1단락 */
-                { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', total: 50 },
                 { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon', total: 30 },
                 { mainId: 'grid-gificon-main', moreId: 'more-gificon', btnId: 'btn-gificon', path: 'img/gificon', total: 20 },
                 { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge', total: 40 },
                 { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq', total: 20 },
+                
                 /* 2단락 */
                 { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen', total: 20 },
                 { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner', total: 20 },
                 { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner', total: 20 },
-                /* 3단락 */
                 { mainId: 'grid-balloon-main', moreId: 'more-balloon', btnId: 'btn-balloon', path: 'img/balloon', total: 20 },
+                
+                /* 3단락 */
+                { mainId: 'grid-gifanim-main', moreId: 'more-gifanim', btnId: 'btn-gifanim', path: 'img/gifanim', total: 20 },
+                { mainId: 'grid-ziptok-main', moreId: 'more-ziptok', btnId: 'btn-ziptok', path: 'img/ziptok', total: 20 },
                 { mainId: 'grid-avatar-main', moreId: 'more-avatar', btnId: 'btn-avatar', path: 'img/avatar', total: 20 }
             ]
         };
 
-        // PNG -> GIF 순서로 자동 교체 탐색 로직
+        // PNG -> GIF 자동 감지 및 이미지 그리드 생성 로직
         window.addEventListener('DOMContentLoaded', () => {
             config.items.forEach(item => {
                 const mainContainer = document.getElementById(item.mainId);
@@ -691,17 +702,14 @@
                     box.onclick = function() { openModal(this); };
 
                     const img = document.createElement('img');
-                    
-                    // 1차 시도: PNG
                     img.src = `${item.path}/${i}.png`;
                     img.alt = `샘플 ${i}`;
 
-                    // PNG가 없는 경우 2차 시도: GIF로 변경
+                    // .png 없을 시 .gif 시도, 최후엔 삭제하여 엑박 방지
                     img.onerror = function() {
                         if (this.src.endsWith('.png')) {
                             this.src = `${item.path}/${i}.gif`;
                         } else {
-                            // PNG도 GIF도 없으면 상자 제거
                             box.remove();
                         }
                     };
