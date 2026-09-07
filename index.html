@@ -729,12 +729,12 @@
                     box.onclick = function() { openModal(this); };
 
                     const img = document.createElement('img');
-                    img.src = `${item.path}/${i}.png`;
+                    img.src = `${item.path}/${i}.PNG`;
                     img.alt = `샘플 ${i}`;
 
                     img.onerror = function() {
-                        if (this.src.endsWith('.png')) {
-                            this.src = `${item.path}/${i}.gif`;
+                        if (this.src.endsWith('.PNG')) {
+                            this.src = `${item.path}/${i}.GIF`;
                         } else {
                             box.remove();
                         }
