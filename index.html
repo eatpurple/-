@@ -713,6 +713,9 @@
     </div>
 
     <script>
+    const GITHUB_USER = 'eatpurple';
+    const GITHUB_REPO = 'eatpurple';
+
     const config = {
         defaultShowCount: 10,
         items: [
@@ -749,62 +752,48 @@
             const btnMore = document.getElementById(item.btnId);
             if (!mainContainer) continue;
 
-            let index = 1;
-            let loadedCount = 0;
-            let consecutiveFailures = 0;
+            try {
+                // GitHub API로 해당 폴더의 파일 목록만 한 번에 호출
+                const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${item.path}`);
+                if (!response.ok) continue;
 
-            // 연속으로 이미지 3번 없으면 해당 폴더 검색 종료
-            while (consecutiveFailures < 3 && index <= 100) {
-                const gifSrc = `${item.path}/${index}.gif`;
-                const pngSrc = `${item.path}/${index}.png`;
+                const filesData = await response.json();
 
-                let exists = await checkImageExists(gifSrc);
-                let validSrc = gifSrc;
+                // 실제 존재하는 이미지 파일만 추출 (.gif, .png, .jpg 등)
+                let imageFiles = filesData.filter(f => f.type === 'file' && /\.(gif|png|jpg|jpeg|webp)$/i.test(f.name));
 
-                if (!exists) {
-                    exists = await checkImageExists(pngSrc);
-                    validSrc = pngSrc;
-                }
+                // 숫자 파일명 순서대로 자동 정렬 (1, 2, 3 ... 10, 11)
+                imageFiles.sort((a, b) => {
+                    return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+                });
 
-                if (exists) {
-                    consecutiveFailures = 0;
+                let loadedCount = 0;
+
+                imageFiles.forEach(file => {
                     loadedCount++;
-                    
                     const targetContainer = (loadedCount <= config.defaultShowCount) ? mainContainer : moreContainer;
-                    
+
                     const box = document.createElement('div');
                     box.className = 'sample-box';
                     box.onclick = function() { openModal(this); };
 
                     const imgTag = document.createElement('img');
-                    imgTag.src = validSrc;
+                    imgTag.src = file.download_url;
+                    imgTag.loading = "lazy";
 
                     box.appendChild(imgTag);
                     targetContainer.appendChild(box);
-                } else {
-                    consecutiveFailures++;
+                });
+
+                // 더보기 버튼 표시 여부
+                if (btnMore) {
+                    btnMore.style.display = (loadedCount > config.defaultShowCount) ? 'block' : 'none';
                 }
 
-                index++;
-            }
-
-            if (btnMore) {
-                if (loadedCount <= config.defaultShowCount) {
-                    btnMore.style.display = 'none';
-                } else {
-                    btnMore.style.display = 'block';
-                }
+            } catch (err) {
+                console.error(`[${item.path}] 로딩 오류:`, err);
             }
         }
-    }
-
-    function checkImageExists(src) {
-        return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => resolve(true);
-            img.onerror = () => resolve(false);
-            img.src = src;
-        });
     }
 
     if (document.readyState === 'loading') {
@@ -821,32 +810,22 @@
         const panels = contentWrapper.querySelectorAll('.tab-panel');
 
         buttons.forEach((btn, i) => {
-            if (i === index) {
-                btn.classList.add('active');
-                panels[i].classList.add('active');
-            } else {
-                btn.classList.remove('active');
-                panels[i].classList.remove('active');
-            }
+            btn.classList.toggle('active', i === index);
+            panels[i].classList.toggle('active', i === index);
         });
     }
 
     // 더보기 토글
     function toggleMore(id, btn) {
         const target = document.getElementById(id);
-        if (target.classList.contains('show')) {
-            target.classList.remove('show');
-            btn.innerText = '더보기 ↓';
-        } else {
-            target.classList.add('show');
-            btn.innerText = '접기 ↑';
-        }
+        const isShow = target.classList.toggle('show');
+        btn.innerText = isShow ? '접기 ↑' : '더보기 ↓';
     }
 
     // 모달 기능 (사진 클릭 시 확대)
     function openModal(element) {
         const img = element.querySelector('img');
-        if (img && img.getAttribute('src')) {
+        if (img && img.src) {
             const modal = document.getElementById('imgModal');
             const modalContainer = document.getElementById('modalContainer');
             const modalImg = document.getElementById('modalImg');
@@ -855,9 +834,7 @@
 
             const rect = element.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const clickY = rect.top + scrollTop + (rect.height / 2);
-
-            modalContainer.style.top = clickY + 'px';
+            modalContainer.style.top = (rect.top + scrollTop + rect.height / 2) + 'px';
             modal.style.display = 'block';
         }
     }
