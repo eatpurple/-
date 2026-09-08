@@ -496,6 +496,7 @@
 </head>
 <body>
 
+    <!-- 프로필 섹션 -->
     <div class="profile-card">
         <div class="sparkle-profile-wrapper">
             <div class="sparkle-ring">
@@ -515,10 +516,12 @@
         </div>
     </div>
 
+    <!-- 일정 안내 -->
     <div class="schedule-box">
         주문 예약 진행 중입니다!
     </div>
 
+    <!-- 공지사항 -->
     <div class="notice-card">
         <div class="notice-badge">✦ 공지사항 ✦</div>
         <div class="notice-subtext">아래 사항을 숙지하지 않아 생기는 불이익은 책임지지 않습니다.</div>
@@ -529,6 +532,7 @@
         </ul>
     </div>
 
+    <!-- 신청양식 -->
     <div class="line-card">
         <div class="card-badge">신청양식</div>
         <div class="form-subtext">복사하셔서 작성해주세요!</div>
@@ -540,6 +544,7 @@
         </div>
     </div>
 
+    <!-- 진행순서 -->
     <div class="line-card">
         <div class="card-badge">진행순서</div>
         <div class="process-flow">
@@ -550,6 +555,7 @@
         </div>
     </div>
 
+    <!-- [1단락] 이모티콘 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">이모티콘</div></div>
 
@@ -562,6 +568,7 @@
         </div>
 
         <div class="tab-content-wrapper" id="content-group-1">
+            <!-- 글자티콘 탭 -->
             <div class="tab-panel active">
                 <div class="header-group"><div class="price-text">개당 0.7</div></div>
                 <div class="grid-responsive" id="grid-texticon-main"></div>
@@ -576,6 +583,7 @@
                 </div>
             </div>
 
+            <!-- 구독티콘 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.5</div></div>
                 <div class="grid-responsive" id="grid-subicon-main"></div>
@@ -583,12 +591,15 @@
                 <button class="btn-more" id="btn-subicon" onclick="toggleMore('more-subicon', this)">더보기 ↓</button>
             </div>
 
+            <!-- 움짤티콘 탭 -->
             <div class="tab-panel">
+                <!-- 미니 -->
                 <div class="header-group"><div class="price-text">미니 개당 2.5</div></div>
                 <div class="grid-responsive" id="grid-gificon-mini-main"></div>
                 <div class="grid-responsive more-content" id="more-gificon-mini"></div>
                 <button class="btn-more" id="btn-gificon-mini" onclick="toggleMore('more-gificon-mini', this)">더보기 ↓</button>
 
+                <!-- 기본 -->
                 <div class="price-sub-section">
                     <div class="header-group"><div class="price-text">기본 개당 3.0</div></div>
                     <div class="grid-responsive" id="grid-gificon-basic-main"></div>
@@ -596,6 +607,7 @@
                     <button class="btn-more" id="btn-gificon-basic" onclick="toggleMore('more-gificon-basic', this)">더보기 ↓</button>
                 </div>
 
+                <!-- 복잡 -->
                 <div class="price-sub-section">
                     <div class="header-group"><div class="price-text">복잡 개당 4.0 ~ @</div></div>
                     <div class="grid-responsive" id="grid-gificon-complex-main"></div>
@@ -604,6 +616,7 @@
                 </div>
             </div>
 
+            <!-- 뱃지 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.0</div></div>
                 <div class="grid-responsive" id="grid-badge-main"></div>
@@ -611,6 +624,7 @@
                 <button class="btn-more" id="btn-badge" onclick="toggleMore('more-badge', this)">더보기 ↓</button>
             </div>
 
+            <!-- OGQ 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">세트 50.0</div></div>
                 <div class="grid-responsive" id="grid-ogq-main"></div>
@@ -620,6 +634,7 @@
         </div>
     </div>
 
+    <!-- [2단락] 방송화면 & 배너 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">방송화면 & 배너</div></div>
 
@@ -651,6 +666,7 @@
         </div>
     </div>
 
+    <!-- [3단락] 시그니처 & 기타 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">시그니처 & 기타</div></div>
 
@@ -689,6 +705,7 @@
         </div>
     </div>
 
+    <!-- 이미지 모달 -->
     <div id="imgModal" class="modal-overlay" onclick="closeModal()">
         <div class="modal-container" id="modalContainer">
             <img id="modalImg" class="modal-content" src="" alt="확대 이미지">
@@ -725,70 +742,68 @@
         ]
     };
 
-    function loadImagesAuto() {
-        config.items.forEach(item => {
+    async function loadImagesAuto() {
+        for (const item of config.items) {
             const mainContainer = document.getElementById(item.mainId);
             const moreContainer = document.getElementById(item.moreId);
             const btnMore = document.getElementById(item.btnId);
-            if (!mainContainer) return;
+            if (!mainContainer) continue;
 
             let index = 1;
             let loadedCount = 0;
+            let consecutiveFailures = 0;
 
-            function checkNextImage() {
-                // 1. .gif 파일 존재 여부 확인
-                const img = new Image();
+            // 연속으로 이미지 3번 없으면 해당 폴더 검색 종료
+            while (consecutiveFailures < 3 && index <= 100) {
                 const gifSrc = `${item.path}/${index}.gif`;
-                
-                img.onload = function() {
-                    addImageToGrid(gifSrc);
-                    index++;
-                    checkNextImage();
-                };
+                const pngSrc = `${item.path}/${index}.png`;
 
-                img.onerror = function() {
-                    // 2. .gif가 없으면 .png 파일 확인
-                    const pngImg = new Image();
-                    const pngSrc = `${item.path}/${index}.png`;
+                let exists = await checkImageExists(gifSrc);
+                let validSrc = gifSrc;
 
-                    pngImg.onload = function() {
-                        addImageToGrid(pngSrc);
-                        index++;
-                        checkNextImage();
-                    };
+                if (!exists) {
+                    exists = await checkImageExists(pngSrc);
+                    validSrc = pngSrc;
+                }
 
-                    pngImg.onerror = function() {
-                        // 3. 더 이상 파일이 없으면 버튼 상태 정리 후 종료
-                        if (loadedCount <= config.defaultShowCount && btnMore) {
-                            btnMore.style.display = 'none';
-                        }
-                    };
-                    pngImg.src = pngSrc;
-                };
+                if (exists) {
+                    consecutiveFailures = 0;
+                    loadedCount++;
+                    
+                    const targetContainer = (loadedCount <= config.defaultShowCount) ? mainContainer : moreContainer;
+                    
+                    const box = document.createElement('div');
+                    box.className = 'sample-box';
+                    box.onclick = function() { openModal(this); };
 
-                img.src = gifSrc;
+                    const imgTag = document.createElement('img');
+                    imgTag.src = validSrc;
+
+                    box.appendChild(imgTag);
+                    targetContainer.appendChild(box);
+                } else {
+                    consecutiveFailures++;
+                }
+
+                index++;
             }
 
-            function addImageToGrid(src) {
-                loadedCount++;
-                const targetContainer = (loadedCount <= config.defaultShowCount) ? mainContainer : moreContainer;
-                
-                const box = document.createElement('div');
-                box.className = 'sample-box';
-                box.onclick = function() { openModal(this); };
-
-                const imgTag = document.createElement('img');
-                imgTag.src = src;
-
-                box.appendChild(imgTag);
-                targetContainer.appendChild(box);
-
-                if (loadedCount > config.defaultShowCount && btnMore) {
+            if (btnMore) {
+                if (loadedCount <= config.defaultShowCount) {
+                    btnMore.style.display = 'none';
+                } else {
                     btnMore.style.display = 'block';
                 }
             }
+        }
+    }
 
-            checkNextImage();
+    function checkImageExists(src) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = src;
         });
     }
 
