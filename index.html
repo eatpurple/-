@@ -732,62 +732,61 @@
     // GitHub API 폴더 캐시 (중복 호출 방지)
     const folderCache = {};
 
-    async function fetchAndRenderImages() {
-        for (const item of config.items) {
-            const mainContainer = document.getElementById(item.mainId);
-            const moreContainer = document.getElementById(item.moreId);
-            const btnMore = document.getElementById(item.btnId);
+   async function fetchAndRenderImages() {
+    for (const item of config.items) {
+        const mainContainer = document.getElementById(item.mainId);
+        const moreContainer = document.getElementById(item.moreId);
+        const btnMore = document.getElementById(item.btnId);
 
-            if (!mainContainer) continue;
+        if (!mainContainer) continue;
 
-            try {
-                // API 데이터 가져오기 및 캐싱
-                if (!folderCache[item.path]) {
-                    const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${item.path}?ref=${branch}`;
-                    const response = await fetch(apiUrl);
-                    if (response.ok) {
-                        folderCache[item.path] = await response.json();
-                    } else {
-                        folderCache[item.path] = [];
-                    }
+        try {
+            if (!folderCache[item.path]) {
+                const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${item.path}?ref=${branch}`;
+                const response = await fetch(apiUrl);
+                if (response.ok) {
+                    folderCache[item.path] = await response.json();
+                } else {
+                    folderCache[item.path] = [];
                 }
-
-                const files = folderCache[item.path];
-
-                // 이미지 파일 필터링 (대소문자 상관없이 PNG, JPG, GIF, WEBP 모두 감지)
-                let imageFiles = files.filter(file => 
-                    /\.(png|jpe?g|gif|webp)$/i.test(file.name)
-                );
-
-                // 이미지 개수가 기본 표시 수 이하이면 더보기 버튼 숨김
-                if (imageFiles.length <= config.defaultShowCount && btnMore) {
-                    btnMore.style.display = 'none';
-                } else if (btnMore) {
-                    btnMore.style.display = 'block';
-                }
-
-                imageFiles.forEach((file, index) => {
-                    const targetContainer = (index < config.defaultShowCount) ? mainContainer : moreContainer;
-
-                    const box = document.createElement('div');
-                    box.className = 'sample-box';
-                    box.onclick = function() { openModal(this); };
-
-                    const img = document.createElement('img');
-                    // 대문자 확장자를 포함해 GitHub에 저장된 파일명 그대로 연결
-                    img.src = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/${item.path}/${file.name}`;
-                    img.alt = file.name;
-
-                    box.appendChild(img);
-                    targetContainer.appendChild(box);
-                });
-
-            } catch (error) {
-                console.error(`폴더 로드 실패 (${item.path}):`, error);
-                if (btnMore) btnMore.style.display = 'none';
             }
+
+            const files = folderCache[item.path];
+
+            // 대소문자 구별 없이 이미지 파일만 필터링
+            let imageFiles = files.filter(file => 
+                /\.(png|jpe?g|gif|webp)$/i.test(file.name)
+            );
+
+            if (imageFiles.length <= config.defaultShowCount && btnMore) {
+                btnMore.style.display = 'none';
+            } else if (btnMore) {
+                btnMore.style.display = 'block';
+            }
+
+            imageFiles.forEach((file, index) => {
+                const targetContainer = (index < config.defaultShowCount) ? mainContainer : moreContainer;
+
+                const box = document.createElement('div');
+                box.className = 'sample-box';
+                box.onclick = function() { openModal(this); };
+
+                const img = document.createElement('img');
+                // raw 주소 조합 대신 API의 download_url을 직접 사용 (대소문자/경로 이슈 완벽 해결)
+                img.src = file.download_url;
+                img.alt = file.name;
+
+                box.appendChild(img);
+                targetContainer.appendChild(box);
+            });
+
+        } catch (error) {
+            console.error(`폴더 로드 실패 (${item.path}):`, error);
+            if (btnMore) btnMore.style.display = 'none';
         }
     }
+}
+
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', fetchAndRenderImages);
