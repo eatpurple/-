@@ -504,7 +504,7 @@
                 <span class="sparkle-item sparkle-3">✦</span>
                 <span class="sparkle-item sparkle-4">✧</span>
             </div>
-            <img src="me.PNG" alt="프로필" class="sparkle-profile-img" onerror="this.src='https://via.placeholder.com/100'">
+            <img src="me.png" alt="프로필" class="sparkle-profile-img" onerror="this.src='https://via.placeholder.com/100'">
         </div>
         <div class="profile-info">
             <div class="profile-name">잇퍼플✦eatpurple</div>
@@ -703,9 +703,9 @@
     const config = {
         defaultShowCount: 10,
         items: [
-            /* 1단락 */
-            { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', splitType: 'first' },
-            { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon', splitType: 'second' },
+            /* 1단락 - 글자티콘 폴더 분리 */
+            { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon' },
+            { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon_gif' },
             { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon' },
             
             /* 움짤티콘 3개 폴더 분리 */
@@ -754,22 +754,16 @@
 
                 const files = folderCache[item.path];
 
-                // 이미지 파일 필터링
+                // 이미지 파일 필터링 (대소문자 상관없이 PNG, JPG, GIF, WEBP 모두 감지)
                 let imageFiles = files.filter(file => 
                     /\.(png|jpe?g|gif|webp)$/i.test(file.name)
                 );
 
-                // 글자티콘 중복 분리 처리
-                if (item.splitType === 'first') {
-                    const half = Math.ceil(imageFiles.length / 2);
-                    imageFiles = imageFiles.slice(0, half);
-                } else if (item.splitType === 'second') {
-                    const half = Math.ceil(imageFiles.length / 2);
-                    imageFiles = imageFiles.slice(half);
-                }
-
+                // 이미지 개수가 기본 표시 수 이하이면 더보기 버튼 숨김
                 if (imageFiles.length <= config.defaultShowCount && btnMore) {
                     btnMore.style.display = 'none';
+                } else if (btnMore) {
+                    btnMore.style.display = 'block';
                 }
 
                 imageFiles.forEach((file, index) => {
@@ -780,6 +774,7 @@
                     box.onclick = function() { openModal(this); };
 
                     const img = document.createElement('img');
+                    // 대문자 확장자를 포함해 GitHub에 저장된 파일명 그대로 연결
                     img.src = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/${item.path}/${file.name}`;
                     img.alt = file.name;
 
