@@ -749,63 +749,79 @@
 
     const folderCache = {};
 
-    async function fetchAndRenderImages() {
-        for (const item of config.items) {
-            const mainContainer = document.getElementById(item.mainId);
-            const moreContainer = document.getElementById(item.moreId);
-            const btnMore = document.getElementById(item.btnId);
+    function loadImagesAuto() {
+    config.items.forEach(item => {
+        const mainContainer = document.getElementById(item.mainId);
+        const moreContainer = document.getElementById(item.moreId);
+        const btnMore = document.getElementById(item.btnId);
+        if (!mainContainer) return;
 
-            if (!mainContainer) continue;
+        let index = 1;
+        let loadedCount = 0;
 
-            try {
-                if (!folderCache[item.path]) {
-                    const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${item.path}?ref=${branch}`;
-                    const response = await fetch(apiUrl);
-                    if (response.ok) {
-                        folderCache[item.path] = await response.json();
-                    } else {
-                        folderCache[item.path] = [];
+        function checkNextImage() {
+            // 1. .gif 파일 존재 여부 확인
+            const img = new Image();
+            const gifSrc = `${item.path}/${index}.gif`;
+            
+            img.onload = function() {
+                addImageToGrid(gifSrc);
+                index++;
+                checkNextImage();
+            };
+
+            img.onerror = function() {
+                // 2. .gif가 없으면 .png 파일 확인
+                const pngImg = new Image();
+                const pngSrc = `${item.path}/${index}.png`;
+
+                pngImg.onload = function() {
+                    addImageToGrid(pngSrc);
+                    index++;
+                    checkNextImage();
+                };
+
+                pngImg.onerror = function() {
+                    // 3. 더 이상 파일이 없으면 버튼 상태 정리 후 종료
+                    if (loadedCount <= config.defaultShowCount && btnMore) {
+                        btnMore.style.display = 'none';
                     }
-                }
+                };
+                pngImg.src = pngSrc;
+            };
 
-                const files = folderCache[item.path];
+            img.src = gifSrc;
+        }
 
-                // 대소문자 관련 없이 이미지 확장자 필터링
-                let imageFiles = files.filter(file => 
-                    /\.(png|jpe?g|gif|webp)$/i.test(file.name)
-                );
+        function addImageToGrid(src) {
+            loadedCount++;
+            const targetContainer = (loadedCount <= config.defaultShowCount) ? mainContainer : moreContainer;
+            
+            const box = document.createElement('div');
+            box.className = 'sample-box';
+            box.onclick = function() { openModal(this); };
 
-                if (imageFiles.length <= config.defaultShowCount && btnMore) {
-                    btnMore.style.display = 'none';
-                } else if (btnMore) {
-                    btnMore.style.display = 'block';
-                }
+            const imgTag = document.createElement('img');
+            imgTag.src = src;
 
-                imageFiles.forEach((file, index) => {
-                    const targetContainer = (index < config.defaultShowCount) ? mainContainer : moreContainer;
+            box.appendChild(imgTag);
+            targetContainer.appendChild(box);
 
-                    const box = document.createElement('div');
-                    box.className = 'sample-box';
-                    box.onclick = function() { openModal(this); };
-
-                    const img = document.createElement('img');
-                    // GitHub API가 보장하는 절대 다운로드 URL을 사용해 대소문자/경로 에러 방지
-                    img.src = file.download_url;
-                    img.alt = file.name;
-
-                    box.appendChild(img);
-                    targetContainer.appendChild(box);
-                });
-
-            } catch (error) {
-                console.error(`폴더 로드 실패 (${item.path}):`, error);
-                if (btnMore) btnMore.style.display = 'none';
+            if (loadedCount > config.defaultShowCount && btnMore) {
+                btnMore.style.display = 'block';
             }
         }
-    }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fetchAndRenderImages);
+        checkNextImage();
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadImagesAuto);
+} else {
+    loadImagesAuto();
+}
+
     } else {
         fetchAndRenderImages();
     }
