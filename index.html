@@ -496,6 +496,7 @@
 </head>
 <body>
 
+    <!-- 프로필 섹션 -->
     <div class="profile-card">
         <div class="sparkle-profile-wrapper">
             <div class="sparkle-ring">
@@ -504,7 +505,8 @@
                 <span class="sparkle-item sparkle-3">✦</span>
                 <span class="sparkle-item sparkle-4">✧</span>
             </div>
-            <img src="me.png" alt="프로필" class="sparkle-profile-img" onerror="this.src='https://via.placeholder.com/100'">
+            <!-- 대체 이미지를 안정적인 더미 서비스로 수정 -->
+            <img src="me.png" alt="프로필" class="sparkle-profile-img" onerror="this.src='https://dummyimage.com/100x100/eceafe/9d96f4.png&text=me'">
         </div>
         <div class="profile-info">
             <div class="profile-name">잇퍼플✦eatpurple</div>
@@ -515,10 +517,12 @@
         </div>
     </div>
 
+    <!-- 일정 안내 -->
     <div class="schedule-box">
         주문 예약 진행 중입니다!
     </div>
 
+    <!-- 공지사항 -->
     <div class="notice-card">
         <div class="notice-badge">✦ 공지사항 ✦</div>
         <div class="notice-subtext">아래 사항을 숙지하지 않아 생기는 불이익은 책임지지 않습니다.</div>
@@ -529,6 +533,7 @@
         </ul>
     </div>
 
+    <!-- 신청양식 -->
     <div class="line-card">
         <div class="card-badge">신청양식</div>
         <div class="form-subtext">복사하셔서 작성해주세요!</div>
@@ -540,6 +545,7 @@
         </div>
     </div>
 
+    <!-- 진행순서 -->
     <div class="line-card">
         <div class="card-badge">진행순서</div>
         <div class="process-flow">
@@ -550,6 +556,7 @@
         </div>
     </div>
 
+    <!-- [1단락] 이모티콘 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">이모티콘</div></div>
 
@@ -562,6 +569,7 @@
         </div>
 
         <div class="tab-content-wrapper" id="content-group-1">
+            <!-- 글자티콘 탭 -->
             <div class="tab-panel active">
                 <div class="header-group"><div class="price-text">개당 0.7</div></div>
                 <div class="grid-responsive" id="grid-texticon-main"></div>
@@ -576,6 +584,7 @@
                 </div>
             </div>
 
+            <!-- 구독티콘 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.5</div></div>
                 <div class="grid-responsive" id="grid-subicon-main"></div>
@@ -583,12 +592,15 @@
                 <button class="btn-more" id="btn-subicon" onclick="toggleMore('more-subicon', this)">더보기 ↓</button>
             </div>
 
+            <!-- 움짤티콘 탭 -->
             <div class="tab-panel">
+                <!-- 미니 -->
                 <div class="header-group"><div class="price-text">미니 개당 2.5</div></div>
                 <div class="grid-responsive" id="grid-gificon-mini-main"></div>
                 <div class="grid-responsive more-content" id="more-gificon-mini"></div>
                 <button class="btn-more" id="btn-gificon-mini" onclick="toggleMore('more-gificon-mini', this)">더보기 ↓</button>
 
+                <!-- 기본 -->
                 <div class="price-sub-section">
                     <div class="header-group"><div class="price-text">기본 개당 3.0</div></div>
                     <div class="grid-responsive" id="grid-gificon-basic-main"></div>
@@ -596,6 +608,7 @@
                     <button class="btn-more" id="btn-gificon-basic" onclick="toggleMore('more-gificon-basic', this)">더보기 ↓</button>
                 </div>
 
+                <!-- 복잡 -->
                 <div class="price-sub-section">
                     <div class="header-group"><div class="price-text">복잡 개당 4.0 ~ @</div></div>
                     <div class="grid-responsive" id="grid-gificon-complex-main"></div>
@@ -604,6 +617,7 @@
                 </div>
             </div>
 
+            <!-- 뱃지 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.0</div></div>
                 <div class="grid-responsive" id="grid-badge-main"></div>
@@ -611,6 +625,7 @@
                 <button class="btn-more" id="btn-badge" onclick="toggleMore('more-badge', this)">더보기 ↓</button>
             </div>
 
+            <!-- OGQ 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">세트 50.0</div></div>
                 <div class="grid-responsive" id="grid-ogq-main"></div>
@@ -620,6 +635,7 @@
         </div>
     </div>
 
+    <!-- [2단락] 방송화면 & 배너 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">방송화면 & 배너</div></div>
 
@@ -651,6 +667,7 @@
         </div>
     </div>
 
+    <!-- [3단락] 시그니처 & 기타 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">시그니처 & 기타</div></div>
 
@@ -689,6 +706,7 @@
         </div>
     </div>
 
+    <!-- 이미지 모달 -->
     <div id="imgModal" class="modal-overlay" onclick="closeModal()">
         <div class="modal-container" id="modalContainer">
             <img id="modalImg" class="modal-content" src="" alt="확대 이미지">
@@ -703,12 +721,12 @@
     const config = {
         defaultShowCount: 10,
         items: [
-            /* 1단락 - 글자티콘 폴더 분리 */
+            /* 1단락 */
             { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon' },
             { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon_gif' },
             { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon' },
             
-            /* 움짤티콘 3개 폴더 분리 */
+            /* 움짤티콘 3개 폴더 */
             { mainId: 'grid-gificon-mini-main', moreId: 'more-gificon-mini', btnId: 'btn-gificon-mini', path: 'img/gifcon_mini' },
             { mainId: 'grid-gificon-basic-main', moreId: 'more-gificon-basic', btnId: 'btn-gificon-basic', path: 'img/gifcon_basic' },
             { mainId: 'grid-gificon-complex-main', moreId: 'more-gificon-complex', btnId: 'btn-gificon-complex', path: 'img/gifcon_complex' },
@@ -729,64 +747,62 @@
         ]
     };
 
-    // GitHub API 폴더 캐시 (중복 호출 방지)
     const folderCache = {};
 
-   async function fetchAndRenderImages() {
-    for (const item of config.items) {
-        const mainContainer = document.getElementById(item.mainId);
-        const moreContainer = document.getElementById(item.moreId);
-        const btnMore = document.getElementById(item.btnId);
+    async function fetchAndRenderImages() {
+        for (const item of config.items) {
+            const mainContainer = document.getElementById(item.mainId);
+            const moreContainer = document.getElementById(item.moreId);
+            const btnMore = document.getElementById(item.btnId);
 
-        if (!mainContainer) continue;
+            if (!mainContainer) continue;
 
-        try {
-            if (!folderCache[item.path]) {
-                const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${item.path}?ref=${branch}`;
-                const response = await fetch(apiUrl);
-                if (response.ok) {
-                    folderCache[item.path] = await response.json();
-                } else {
-                    folderCache[item.path] = [];
+            try {
+                if (!folderCache[item.path]) {
+                    const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${item.path}?ref=${branch}`;
+                    const response = await fetch(apiUrl);
+                    if (response.ok) {
+                        folderCache[item.path] = await response.json();
+                    } else {
+                        folderCache[item.path] = [];
+                    }
                 }
+
+                const files = folderCache[item.path];
+
+                // 대소문자 관련 없이 이미지 확장자 필터링
+                let imageFiles = files.filter(file => 
+                    /\.(png|jpe?g|gif|webp)$/i.test(file.name)
+                );
+
+                if (imageFiles.length <= config.defaultShowCount && btnMore) {
+                    btnMore.style.display = 'none';
+                } else if (btnMore) {
+                    btnMore.style.display = 'block';
+                }
+
+                imageFiles.forEach((file, index) => {
+                    const targetContainer = (index < config.defaultShowCount) ? mainContainer : moreContainer;
+
+                    const box = document.createElement('div');
+                    box.className = 'sample-box';
+                    box.onclick = function() { openModal(this); };
+
+                    const img = document.createElement('img');
+                    // GitHub API가 보장하는 절대 다운로드 URL을 사용해 대소문자/경로 에러 방지
+                    img.src = file.download_url;
+                    img.alt = file.name;
+
+                    box.appendChild(img);
+                    targetContainer.appendChild(box);
+                });
+
+            } catch (error) {
+                console.error(`폴더 로드 실패 (${item.path}):`, error);
+                if (btnMore) btnMore.style.display = 'none';
             }
-
-            const files = folderCache[item.path];
-
-            // 대소문자 구별 없이 이미지 파일만 필터링
-            let imageFiles = files.filter(file => 
-                /\.(png|jpe?g|gif|webp)$/i.test(file.name)
-            );
-
-            if (imageFiles.length <= config.defaultShowCount && btnMore) {
-                btnMore.style.display = 'none';
-            } else if (btnMore) {
-                btnMore.style.display = 'block';
-            }
-
-            imageFiles.forEach((file, index) => {
-                const targetContainer = (index < config.defaultShowCount) ? mainContainer : moreContainer;
-
-                const box = document.createElement('div');
-                box.className = 'sample-box';
-                box.onclick = function() { openModal(this); };
-
-                const img = document.createElement('img');
-                // raw 주소 조합 대신 API의 download_url을 직접 사용 (대소문자/경로 이슈 완벽 해결)
-                img.src = file.download_url;
-                img.alt = file.name;
-
-                box.appendChild(img);
-                targetContainer.appendChild(box);
-            });
-
-        } catch (error) {
-            console.error(`폴더 로드 실패 (${item.path}):`, error);
-            if (btnMore) btnMore.style.display = 'none';
         }
     }
-}
-
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', fetchAndRenderImages);
