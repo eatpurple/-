@@ -496,7 +496,6 @@
 </head>
 <body>
 
-    <!-- 프로필 섹션 -->
     <div class="profile-card">
         <div class="sparkle-profile-wrapper">
             <div class="sparkle-ring">
@@ -516,12 +515,10 @@
         </div>
     </div>
 
-    <!-- 일정 안내 -->
     <div class="schedule-box">
         주문 예약 진행 중입니다!
     </div>
 
-    <!-- 공지사항 -->
     <div class="notice-card">
         <div class="notice-badge">✦ 공지사항 ✦</div>
         <div class="notice-subtext">아래 사항을 숙지하지 않아 생기는 불이익은 책임지지 않습니다.</div>
@@ -532,7 +529,6 @@
         </ul>
     </div>
 
-    <!-- 신청양식 -->
     <div class="line-card">
         <div class="card-badge">신청양식</div>
         <div class="form-subtext">복사하셔서 작성해주세요!</div>
@@ -544,7 +540,6 @@
         </div>
     </div>
 
-    <!-- 진행순서 -->
     <div class="line-card">
         <div class="card-badge">진행순서</div>
         <div class="process-flow">
@@ -555,10 +550,9 @@
         </div>
     </div>
 
-    <!-- [1단락] 이모티콘 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">이모티콘</div></div>
-        
+
         <div class="tab-container" id="tab-group-1">
             <button class="tab-btn active" onclick="switchTab('tab-group-1', 'content-group-1', 0)">글자티콘</button>
             <button class="tab-btn" onclick="switchTab('tab-group-1', 'content-group-1', 1)">구독티콘</button>
@@ -568,7 +562,6 @@
         </div>
 
         <div class="tab-content-wrapper" id="content-group-1">
-            <!-- 글자티콘 탭 (멈춘 글자티콘 + 움직이는 글자티콘 2분할 복원) -->
             <div class="tab-panel active">
                 <div class="header-group"><div class="price-text">개당 0.7</div></div>
                 <div class="grid-responsive" id="grid-texticon-main"></div>
@@ -583,7 +576,6 @@
                 </div>
             </div>
 
-            <!-- 구독티콘 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.5</div></div>
                 <div class="grid-responsive" id="grid-subicon-main"></div>
@@ -591,15 +583,27 @@
                 <button class="btn-more" id="btn-subicon" onclick="toggleMore('more-subicon', this)">더보기 ↓</button>
             </div>
 
-            <!-- 움짤티콘 탭 (단가별 2분할 복원) -->
             <div class="tab-panel">
-                <div class="header-group"><div class="price-text">개당 2.5 ~ 3.5</div></div>
-                <div class="grid-responsive" id="grid-gificon-main"></div>
-                <div class="grid-responsive more-content" id="more-gificon"></div>
-                <button class="btn-more" id="btn-gificon" onclick="toggleMore('more-gificon', this)">더보기 ↓</button>
+                <div class="header-group"><div class="price-text">미니 개당 2.5</div></div>
+                <div class="grid-responsive" id="grid-gificon-mini-main"></div>
+                <div class="grid-responsive more-content" id="more-gificon-mini"></div>
+                <button class="btn-more" id="btn-gificon-mini" onclick="toggleMore('more-gificon-mini', this)">더보기 ↓</button>
+
+                <div class="price-sub-section">
+                    <div class="header-group"><div class="price-text">기본 개당 3.0</div></div>
+                    <div class="grid-responsive" id="grid-gificon-basic-main"></div>
+                    <div class="grid-responsive more-content" id="more-gificon-basic"></div>
+                    <button class="btn-more" id="btn-gificon-basic" onclick="toggleMore('more-gificon-basic', this)">더보기 ↓</button>
+                </div>
+
+                <div class="price-sub-section">
+                    <div class="header-group"><div class="price-text">복잡 개당 4.0 ~ @</div></div>
+                    <div class="grid-responsive" id="grid-gificon-complex-main"></div>
+                    <div class="grid-responsive more-content" id="more-gificon-complex"></div>
+                    <button class="btn-more" id="btn-gificon-complex" onclick="toggleMore('more-gificon-complex', this)">더보기 ↓</button>
+                </div>
             </div>
 
-            <!-- 뱃지 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.0</div></div>
                 <div class="grid-responsive" id="grid-badge-main"></div>
@@ -607,7 +611,6 @@
                 <button class="btn-more" id="btn-badge" onclick="toggleMore('more-badge', this)">더보기 ↓</button>
             </div>
 
-            <!-- OGQ 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">세트 50.0</div></div>
                 <div class="grid-responsive" id="grid-ogq-main"></div>
@@ -617,10 +620,9 @@
         </div>
     </div>
 
-    <!-- [2단락] 방송화면 & 배너 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">방송화면 & 배너</div></div>
-        
+
         <div class="tab-container" id="tab-group-2">
             <button class="tab-btn active" onclick="switchTab('tab-group-2', 'content-group-2', 0)">방송화면 / 대기화면</button>
             <button class="tab-btn" onclick="switchTab('tab-group-2', 'content-group-2', 1)">상단배너 / 채널아트</button>
@@ -649,10 +651,9 @@
         </div>
     </div>
 
-    <!-- [3단락] 시그니처 & 기타 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">시그니처 & 기타</div></div>
-        
+
         <div class="tab-container" id="tab-group-3">
             <button class="tab-btn active" onclick="switchTab('tab-group-3', 'content-group-3', 0)">시그니처풍선</button>
             <button class="tab-btn" onclick="switchTab('tab-group-3', 'content-group-3', 1)">후원움짤</button>
@@ -688,7 +689,6 @@
         </div>
     </div>
 
-    <!-- 이미지 모달 -->
     <div id="imgModal" class="modal-overlay" onclick="closeModal()">
         <div class="modal-container" id="modalContainer">
             <img id="modalImg" class="modal-content" src="" alt="확대 이미지">
@@ -707,15 +707,20 @@
             { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', splitType: 'first' },
             { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon', splitType: 'second' },
             { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon' },
-            { mainId: 'grid-gificon-main', moreId: 'more-gificon', btnId: 'btn-gificon', path: 'img/gifcon' },
+            
+            /* 움짤티콘 3개 폴더 분리 */
+            { mainId: 'grid-gificon-mini-main', moreId: 'more-gificon-mini', btnId: 'btn-gificon-mini', path: 'img/gifcon_mini' },
+            { mainId: 'grid-gificon-basic-main', moreId: 'more-gificon-basic', btnId: 'btn-gificon-basic', path: 'img/gifcon_basic' },
+            { mainId: 'grid-gificon-complex-main', moreId: 'more-gificon-complex', btnId: 'btn-gificon-complex', path: 'img/gifcon_complex' },
+
             { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge' },
             { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq' },
-            
+
             /* 2단락 */
             { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen' },
             { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner' },
             { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner' },
-            
+
             /* 3단락 */
             { mainId: 'grid-balloon-main', moreId: 'more-balloon', btnId: 'btn-balloon', path: 'img/balloon' },
             { mainId: 'grid-gifanim-main', moreId: 'more-gifanim', btnId: 'btn-gifanim', path: 'img/gifanim' },
@@ -724,7 +729,7 @@
         ]
     };
 
-    // GitHub API 폴더 캐시 (같은 폴더 두 번 불러와서 일어나는 중복 방지)
+    // GitHub API 폴더 캐시 (중복 호출 방지)
     const folderCache = {};
 
     async function fetchAndRenderImages() {
@@ -748,13 +753,13 @@
                 }
 
                 const files = folderCache[item.path];
-                
+
                 // 이미지 파일 필터링
                 let imageFiles = files.filter(file => 
                     /\.(png|jpe?g|gif|webp)$/i.test(file.name)
                 );
 
-                // 글자티콘 중복 분리 처리 (상/하단 나눠 담기)
+                // 글자티콘 중복 분리 처리
                 if (item.splitType === 'first') {
                     const half = Math.ceil(imageFiles.length / 2);
                     imageFiles = imageFiles.slice(0, half);
@@ -832,7 +837,7 @@
             const modal = document.getElementById('imgModal');
             const modalContainer = document.getElementById('modalContainer');
             const modalImg = document.getElementById('modalImg');
-            
+
             modalImg.src = img.src;
 
             const rect = element.getBoundingClientRect();
