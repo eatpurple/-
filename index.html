@@ -378,17 +378,31 @@
             border-top: 1px dashed #DDD;
         }
 
-        /* 샘플 이미지 그리드 */
+        /* 기본 정사각형 이모티콘 샘플 그리드 (10열) */
         .grid-responsive {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
             gap: 6px;
         }
 
-        .sample-box {
+        .grid-responsive .sample-box {
             aspect-ratio: 1 / 1;
+        }
+
+        /* 방송화면 등 가로형 작품용 그리드 (2열 / 16:9 비율) */
+        .grid-wide {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .grid-wide .sample-box {
+            aspect-ratio: 16 / 9;
+        }
+
+        .sample-box {
             background-color: #F8F9FA;
-            border-radius: 6px;
+            border-radius: 8px;
             border: 1px dashed #D1D5DB;
             display: flex;
             align-items: center;
@@ -399,7 +413,7 @@
         }
 
         .sample-box:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         .sample-box img {
@@ -489,6 +503,7 @@
             .profile-name { justify-content: center; }
             .outer-frame { padding: 16px 10px; border-radius: 20px; }
             .grid-responsive { grid-template-columns: repeat(5, 1fr); gap: 4px; }
+            .grid-wide { grid-template-columns: 1fr; gap: 8px; } /* 모바일에선 1열로 넓게 세로 배치 */
             .tab-btn { padding: 8px 12px; font-size: 13px; }
             .process-flow { grid-template-columns: repeat(2, 1fr); gap: 8px; }
         }
@@ -496,7 +511,6 @@
 </head>
 <body>
 
-    <!-- 프로필 섹션 -->
     <div class="profile-card">
         <div class="sparkle-profile-wrapper">
             <div class="sparkle-ring">
@@ -516,12 +530,10 @@
         </div>
     </div>
 
-    <!-- 일정 안내 -->
     <div class="schedule-box">
         주문 예약 진행 중입니다!
     </div>
 
-    <!-- 공지사항 -->
     <div class="notice-card">
         <div class="notice-badge">✦ 공지사항 ✦</div>
         <div class="notice-subtext">아래 사항을 숙지하지 않아 생기는 불이익은 책임지지 않습니다.</div>
@@ -532,7 +544,6 @@
         </ul>
     </div>
 
-    <!-- 신청양식 -->
     <div class="line-card">
         <div class="card-badge">신청양식</div>
         <div class="form-subtext">복사하셔서 작성해주세요!</div>
@@ -544,7 +555,6 @@
         </div>
     </div>
 
-    <!-- 진행순서 -->
     <div class="line-card">
         <div class="card-badge">진행순서</div>
         <div class="process-flow">
@@ -555,7 +565,6 @@
         </div>
     </div>
 
-    <!-- [1단락] 이모티콘 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">이모티콘</div></div>
 
@@ -568,7 +577,6 @@
         </div>
 
         <div class="tab-content-wrapper" id="content-group-1">
-            <!-- 글자티콘 탭 -->
             <div class="tab-panel active">
                 <div class="header-group"><div class="price-text">개당 0.7</div></div>
                 <div class="grid-responsive" id="grid-texticon-main"></div>
@@ -583,7 +591,6 @@
                 </div>
             </div>
 
-            <!-- 구독티콘 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.5</div></div>
                 <div class="grid-responsive" id="grid-subicon-main"></div>
@@ -591,15 +598,12 @@
                 <button class="btn-more" id="btn-subicon" onclick="toggleMore('more-subicon', this)">더보기 ↓</button>
             </div>
 
-            <!-- 움짤티콘 탭 -->
             <div class="tab-panel">
-                <!-- 미니 -->
                 <div class="header-group"><div class="price-text">미니 개당 2.5</div></div>
                 <div class="grid-responsive" id="grid-gificon-mini-main"></div>
                 <div class="grid-responsive more-content" id="more-gificon-mini"></div>
                 <button class="btn-more" id="btn-gificon-mini" onclick="toggleMore('more-gificon-mini', this)">더보기 ↓</button>
 
-                <!-- 기본 -->
                 <div class="price-sub-section">
                     <div class="header-group"><div class="price-text">기본 개당 3.0</div></div>
                     <div class="grid-responsive" id="grid-gificon-basic-main"></div>
@@ -607,7 +611,6 @@
                     <button class="btn-more" id="btn-gificon-basic" onclick="toggleMore('more-gificon-basic', this)">더보기 ↓</button>
                 </div>
 
-                <!-- 복잡 -->
                 <div class="price-sub-section">
                     <div class="header-group"><div class="price-text">복잡 개당 4.0 ~ @</div></div>
                     <div class="grid-responsive" id="grid-gificon-complex-main"></div>
@@ -616,7 +619,6 @@
                 </div>
             </div>
 
-            <!-- 뱃지 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 1.0</div></div>
                 <div class="grid-responsive" id="grid-badge-main"></div>
@@ -624,7 +626,6 @@
                 <button class="btn-more" id="btn-badge" onclick="toggleMore('more-badge', this)">더보기 ↓</button>
             </div>
 
-            <!-- OGQ 탭 -->
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">세트 50.0</div></div>
                 <div class="grid-responsive" id="grid-ogq-main"></div>
@@ -634,7 +635,6 @@
         </div>
     </div>
 
-    <!-- [2단락] 방송화면 & 배너 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">방송화면 & 배너</div></div>
 
@@ -646,27 +646,26 @@
 
         <div class="tab-content-wrapper" id="content-group-2">
             <div class="tab-panel active">
-                 <!-- A타입 -->
-                <div class="header-group"><div class="price-text">개당 5.0</div></div>
-                <div class="grid-responsive" id="grid-screen-main"></div>
-                <div class="grid-responsive more-content" id="more-screen"></div>
+                <div class="header-group"><div class="price-text">A타입 개당 5.0</div></div>
+                <div class="grid-wide" id="grid-screen-main"></div>
+                <div class="grid-wide more-content" id="more-screen"></div>
                 <button class="btn-more" id="btn-screen" onclick="toggleMore('more-screen', this)">더보기 ↓</button>
-                
-                  <!-- B타입 -->
+
                 <div class="price-sub-section">
-                    <div class="header-group"><div class="price-text">기본 개당 3.0</div></div>
-                    <div class="grid-responsive" id="grid-gificon-basic-main"></div>
-                    <div class="grid-responsive more-content" id="more-gificon-screen-b"></div>
+                    <div class="header-group"><div class="price-text">B타입 개당 3.0</div></div>
+                    <div class="grid-wide" id="grid-screen-b-main"></div>
+                    <div class="grid-wide more-content" id="more-screen-b"></div>
                     <button class="btn-more" id="btn-screen-b" onclick="toggleMore('more-screen-b', this)">더보기 ↓</button>
                 </div>
-                
             </div>
+
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 3.0</div></div>
-                <div class="grid-responsive" id="grid-topbanner-main"></div>
-                <div class="grid-responsive more-content" id="more-topbanner"></div>
+                <div class="grid-wide" id="grid-topbanner-main"></div>
+                <div class="grid-wide more-content" id="more-topbanner"></div>
                 <button class="btn-more" id="btn-topbanner" onclick="toggleMore('more-topbanner', this)">더보기 ↓</button>
             </div>
+
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 2.0</div></div>
                 <div class="grid-responsive" id="grid-botbanner-main"></div>
@@ -676,7 +675,6 @@
         </div>
     </div>
 
-    <!-- [3단락] 시그니처 & 기타 -->
     <div class="outer-frame">
         <div class="frame-header"><div class="frame-title-badge">시그니처 & 기타</div></div>
 
@@ -715,7 +713,6 @@
         </div>
     </div>
 
-    <!-- 이미지 모달 -->
     <div id="imgModal" class="modal-overlay" onclick="closeModal()">
         <div class="modal-container" id="modalContainer">
             <img id="modalImg" class="modal-content" src="" alt="확대 이미지">
@@ -742,10 +739,9 @@
             { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge' },
             { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq' },
 
-            /* 2단락 */
-              /* 방송화면 2개 폴더 */
+            /* 2단락 - 방송화면 A / B 폴더 각각 연결 */
             { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen' },
-            { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen-b' },
+            { mainId: 'grid-screen-b-main', moreId: 'more-screen-b', btnId: 'btn-screen-b', path: 'img/screen-b' },
 
             { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner' },
             { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner' },
@@ -766,16 +762,13 @@
             if (!mainContainer) continue;
 
             try {
-                // GitHub API로 해당 폴더의 파일 목록만 한 번에 호출
                 const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${item.path}`);
                 if (!response.ok) continue;
 
                 const filesData = await response.json();
 
-                // 실제 존재하는 이미지 파일만 추출 (.gif, .png, .jpg 등)
                 let imageFiles = filesData.filter(f => f.type === 'file' && /\.(gif|png|jpg|jpeg|webp)$/i.test(f.name));
 
-                // 숫자 파일명 순서대로 자동 정렬 (1, 2, 3 ... 10, 11)
                 imageFiles.sort((a, b) => {
                     return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
                 });
@@ -798,7 +791,6 @@
                     targetContainer.appendChild(box);
                 });
 
-                // 더보기 버튼 표시 여부
                 if (btnMore) {
                     btnMore.style.display = (loadedCount > config.defaultShowCount) ? 'block' : 'none';
                 }
@@ -815,7 +807,6 @@
         loadImagesAuto();
     }
 
-    // 탭 전환
     function switchTab(groupId, contentId, index) {
         const tabContainer = document.getElementById(groupId);
         const buttons = tabContainer.querySelectorAll('.tab-btn');
@@ -828,14 +819,12 @@
         });
     }
 
-    // 더보기 토글
     function toggleMore(id, btn) {
         const target = document.getElementById(id);
         const isShow = target.classList.toggle('show');
         btn.innerText = isShow ? '접기 ↑' : '더보기 ↓';
     }
 
-    // 모달 기능 (사진 클릭 시 확대)
     function openModal(element) {
         const img = element.querySelector('img');
         if (img && img.src) {
