@@ -719,36 +719,34 @@
         </div>
     </div>
 
-    <script>
-// 각 폴더 경로와 불러올 이미지 개수(count) 설정
-// 파일명이 1.png, 2.png, 3.png ... 형태여야 합니다.
+   <script>
 const config = {
     defaultShowCount: 10,
     items: [
         /* 1단락 */
-        { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', count: 10, ext: 'PNG' },
-        { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon_gif', count: 10, ext: 'GIF' },
-        { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon', count: 8, ext: 'PNG' },
-        
-        /* 움짤티콘 */
-        { mainId: 'grid-gificon-mini-main', moreId: 'more-gificon-mini', btnId: 'btn-gificon-mini', path: 'img/gifcon_mini', count: 13, ext: 'GIF' },
-        { mainId: 'grid-gificon-basic-main', moreId: 'more-gificon-basic', btnId: 'btn-gificon-basic', path: 'img/gifcon_basic', count: 92, ext: 'GIF' },
-        { mainId: 'grid-gificon-complex-main', moreId: 'more-gificon-complex', btnId: 'btn-gificon-complex', path: 'img/gifcon_complex', count: 27, ext: 'GIF' },
+        { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', count: 10, ext: 'png' },
+        { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon_gif', count: 10, ext: 'gif' },
+        { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon', count: 8, ext: 'png' },
 
-        { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge', count: 10, ext: 'PNG' },
-        { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq', count: 8, ext: 'PNG' },
+        /* 움짤티콘 */
+        { mainId: 'grid-gificon-mini-main', moreId: 'more-gificon-mini', btnId: 'btn-gificon-mini', path: 'img/gifcon_mini', count: 13, ext: 'gif' },
+        { mainId: 'grid-gificon-basic-main', moreId: 'more-gificon-basic', btnId: 'btn-gificon-basic', path: 'img/gifcon_basic', count: 92, ext: 'gif' },
+        { mainId: 'grid-gificon-complex-main', moreId: 'more-gificon-complex', btnId: 'btn-gificon-complex', path: 'img/gifcon_complex', count: 27, ext: 'gif' },
+
+        { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge', count: 10, ext: 'png' },
+        { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq', count: 8, ext: 'png' },
 
         /* 2단락 - 방송화면/배너 */
-        { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen', count: 4, ext: 'PNG' },
-        { mainId: 'grid-screen-b-main', moreId: 'more-screen-b', btnId: 'btn-screen-b', path: 'img/screen-b', count: 4, ext: 'PNG' },
-        { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner', count: 6, ext: 'PNG' },
-        { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner', count: 12, ext: 'PNG' },
+        { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen', count: 4, ext: 'png' },
+        { mainId: 'grid-screen-b-main', moreId: 'more-screen-b', btnId: 'btn-screen-b', path: 'img/screen-b', count: 4, ext: 'png' },
+        { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner', count: 6, ext: 'png' },
+        { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner', count: 12, ext: 'png' },
 
         /* 3단락 */
-        { mainId: 'grid-balloon-main', moreId: 'more-balloon', btnId: 'btn-balloon', path: 'img/balloon', count: 8, ext: 'GIF' },
-        { mainId: 'grid-gifanim-main', moreId: 'more-gifanim', btnId: 'btn-gifanim', path: 'img/gifanim', count: 5, ext: 'GIF' },
-        { mainId: 'grid-ziptok-main', moreId: 'more-ziptok', btnId: 'btn-ziptok', path: 'img/ziptok', count: 6, ext: 'PNG' },
-        { mainId: 'grid-avatar-main', moreId: 'more-avatar', btnId: 'btn-avatar', path: 'img/avatar', count: 6, ext: 'PNG' }
+        { mainId: 'grid-balloon-main', moreId: 'more-balloon', btnId: 'btn-balloon', path: 'img/balloon', count: 8, ext: 'gif' },
+        { mainId: 'grid-gifanim-main', moreId: 'more-gifanim', btnId: 'btn-gifanim', path: 'img/gifanim', count: 5, ext: 'gif' },
+        { mainId: 'grid-ziptok-main', moreId: 'more-ziptok', btnId: 'btn-ziptok', path: 'img/ziptok', count: 6, ext: 'png' },
+        { mainId: 'grid-avatar-main', moreId: 'more-avatar', btnId: 'btn-avatar', path: 'img/avatar', count: 6, ext: 'png' }
     ]
 };
 
@@ -759,44 +757,51 @@ function loadImagesDirect() {
         const btnMore = document.getElementById(item.btnId);
         if (!mainContainer) return;
 
-        let loadedCount = 0;
-        const fileExt = item.ext ? item.ext : 'PNG';
+        mainContainer.innerHTML = '';
+        if (moreContainer) moreContainer.innerHTML = '';
+
+        const fileExt = item.ext.toLowerCase();
 
         for (let i = 1; i <= item.count; i++) {
+            const targetContainer = (i <= config.defaultShowCount) ? mainContainer : moreContainer;
+            if (!targetContainer) continue;
+
             const box = document.createElement('div');
             box.className = 'sample-box';
             box.onclick = function() { openModal(this); };
 
             const imgTag = document.createElement('img');
-            imgTag.src = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${fileExt}`;
+            const primarySrc = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${fileExt}`;
+            
+            imgTag.src = primarySrc;
             imgTag.loading = "lazy";
 
-            // ★ 없는 이미지(404)일 경우 박스를 삭제하고 더보기 버튼 개수 조절
+            // 대소문자 문제 처리: 실패 시 대문자 확장자로 1회 재시도, 그래도 실패하면 제거
             imgTag.onerror = function() {
-                box.remove();
-            };
-
-            // 정상적으로 로드된 이미지에만 순서 배정 및 추가
-            imgTag.onload = function() {
-                loadedCount++;
-                const targetContainer = (loadedCount <= config.defaultShowCount) ? mainContainer : moreContainer;
-                targetContainer.appendChild(box);
-
-                if (btnMore) {
-                    btnMore.style.display = (loadedCount > config.defaultShowCount) ? 'block' : 'none';
+                if (!this.dataset.retried) {
+                    this.dataset.retried = "true";
+                    this.src = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${fileExt.toUpperCase()}`;
+                } else {
+                    box.remove();
                 }
             };
 
             box.appendChild(imgTag);
+            targetContainer.appendChild(box);
+        }
+
+        // 수량이 10개를 초과할 때만 더보기 버튼 표시
+        if (btnMore) {
+            if (item.count > config.defaultShowCount) {
+                btnMore.style.display = 'block';
+            } else {
+                btnMore.style.display = 'none';
+            }
         }
     });
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadImagesDirect);
-} else {
-    loadImagesDirect();
-}
+document.addEventListener('DOMContentLoaded', loadImagesDirect);
 
 function switchTab(groupId, contentId, index) {
     const tabContainer = document.getElementById(groupId);
@@ -812,6 +817,8 @@ function switchTab(groupId, contentId, index) {
 
 function toggleMore(id, btn) {
     const target = document.getElementById(id);
+    if (!target) return;
+    
     const isShow = target.classList.toggle('show');
     btn.innerText = isShow ? '접기 ↑' : '더보기 ↓';
 }
@@ -820,15 +827,10 @@ function openModal(element) {
     const img = element.querySelector('img');
     if (img && img.src) {
         const modal = document.getElementById('imgModal');
-        const modalContainer = document.getElementById('modalContainer');
         const modalImg = document.getElementById('modalImg');
 
         modalImg.src = img.src;
-
-        const rect = element.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        modalContainer.style.top = (rect.top + scrollTop + rect.height / 2) + 'px';
-        modal.style.display = 'block';
+        modal.style.display = 'flex';
     }
 }
 
