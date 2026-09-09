@@ -726,29 +726,29 @@ const config = {
     defaultShowCount: 10,
     items: [
         /* 1단락 */
-        { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', count: 12 },
-        { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon_gif', count: 5 },
-        { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon', count: 15 },
+        { mainId: 'grid-texticon-main', moreId: 'more-texticon', btnId: 'btn-texticon', path: 'img/texticon', count: 12, ext: 'PNG' },
+        { mainId: 'grid-texticon-gif-main', moreId: 'more-texticon-gif', btnId: 'btn-texticon-gif', path: 'img/texticon_gif', count: 5, ext: 'GIF' },
+        { mainId: 'grid-subicon-main', moreId: 'more-subicon', btnId: 'btn-subicon', path: 'img/subicon', count: 15, ext: 'PNG' },
         
         /* 움짤티콘 */
-        { mainId: 'grid-gificon-mini-main', moreId: 'more-gificon-mini', btnId: 'btn-gificon-mini', path: 'img/gifcon_mini', count: 8 },
-        { mainId: 'grid-gificon-basic-main', moreId: 'more-gificon-basic', btnId: 'btn-gificon-basic', path: 'img/gifcon_basic', count: 10 },
-        { mainId: 'grid-gificon-complex-main', moreId: 'more-gificon-complex', btnId: 'btn-gificon-complex', path: 'img/gifcon_complex', count: 6 },
+        { mainId: 'grid-gificon-mini-main', moreId: 'more-gificon-mini', btnId: 'btn-gificon-mini', path: 'img/gifcon_mini', count: 8, ext: 'GIF' },
+        { mainId: 'grid-gificon-basic-main', moreId: 'more-gificon-basic', btnId: 'btn-gificon-basic', path: 'img/gifcon_basic', count: 10, ext: 'GIF' },
+        { mainId: 'grid-gificon-complex-main', moreId: 'more-gificon-complex', btnId: 'btn-gificon-complex', path: 'img/gifcon_complex', count: 6, ext: 'GIF' },
 
-        { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge', count: 10 },
-        { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq', count: 8 },
+        { mainId: 'grid-badge-main', moreId: 'more-badge', btnId: 'btn-badge', path: 'img/badge', count: 10, ext: 'PNG' },
+        { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq', count: 8, ext: 'PNG' },
 
         /* 2단락 - 방송화면/배너 */
-        { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen', count: 4 },
-        { mainId: 'grid-screen-b-main', moreId: 'more-screen-b', btnId: 'btn-screen-b', path: 'img/screen-b', count: 4 },
-        { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner', count: 6 },
-        { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner', count: 12 },
+        { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen', count: 4, ext: 'PNG' },
+        { mainId: 'grid-screen-b-main', moreId: 'more-screen-b', btnId: 'btn-screen-b', path: 'img/screen-b', count: 4, ext: 'PNG' },
+        { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner', count: 6, ext: 'PNG' },
+        { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner', count: 12, ext: 'PNG' },
 
         /* 3단락 */
-        { mainId: 'grid-balloon-main', moreId: 'more-balloon', btnId: 'btn-balloon', path: 'img/balloon', count: 8 },
-        { mainId: 'grid-gifanim-main', moreId: 'more-gifanim', btnId: 'btn-gifanim', path: 'img/gifanim', count: 5 },
-        { mainId: 'grid-ziptok-main', moreId: 'more-ziptok', btnId: 'btn-ziptok', path: 'img/ziptok', count: 6 },
-        { mainId: 'grid-avatar-main', moreId: 'more-avatar', btnId: 'btn-avatar', path: 'img/avatar', count: 6 }
+        { mainId: 'grid-balloon-main', moreId: 'more-balloon', btnId: 'btn-balloon', path: 'img/balloon', count: 8, ext: 'GIF' },
+        { mainId: 'grid-gifanim-main', moreId: 'more-gifanim', btnId: 'btn-gifanim', path: 'img/gifanim', count: 5, ext: 'GIF' },
+        { mainId: 'grid-ziptok-main', moreId: 'more-ziptok', btnId: 'btn-ziptok', path: 'img/ziptok', count: 6, ext: 'PNG' },
+        { mainId: 'grid-avatar-main', moreId: 'more-avatar', btnId: 'btn-avatar', path: 'img/avatar', count: 6, ext: 'PNG' }
     ]
 };
 
@@ -760,6 +760,9 @@ function loadImagesDirect() {
         if (!mainContainer) return;
 
         let loadedCount = 0;
+        // 경로에 'gif'가 포함되어 있거나 ext가 GIF면 대문자 GIF 적용
+        const isGifPath = item.path.toLowerCase().includes('gif') || item.ext === 'GIF';
+        const fileExt = isGifPath ? 'GIF' : (item.ext || 'PNG');
 
         for (let i = 1; i <= item.count; i++) {
             loadedCount++;
@@ -770,8 +773,8 @@ function loadImagesDirect() {
             box.onclick = function() { openModal(this); };
 
             const imgTag = document.createElement('img');
-            // GitHub Pages 정적 URL 직접 참조 (403 에러 원천 차단)
-            imgTag.src = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.png`;
+            // 대문자 확장자(1.PNG, 1.GIF)로 직접 호출
+            imgTag.src = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${fileExt}`;
             imgTag.loading = "lazy";
 
             box.appendChild(imgTag);
