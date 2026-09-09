@@ -505,7 +505,6 @@
                 <span class="sparkle-item sparkle-3">✦</span>
                 <span class="sparkle-item sparkle-4">✧</span>
             </div>
-            <!-- 대체 이미지를 안정적인 더미 서비스로 수정 -->
             <img src="me.png" alt="프로필" class="sparkle-profile-img" onerror="this.src='https://dummyimage.com/100x100/eceafe/9d96f4.png&text=me'">
         </div>
         <div class="profile-info">
@@ -647,10 +646,20 @@
 
         <div class="tab-content-wrapper" id="content-group-2">
             <div class="tab-panel active">
+                 <!-- A타입 -->
                 <div class="header-group"><div class="price-text">개당 5.0</div></div>
                 <div class="grid-responsive" id="grid-screen-main"></div>
                 <div class="grid-responsive more-content" id="more-screen"></div>
                 <button class="btn-more" id="btn-screen" onclick="toggleMore('more-screen', this)">더보기 ↓</button>
+                
+                  <!-- B타입 -->
+                <div class="price-sub-section">
+                    <div class="header-group"><div class="price-text">기본 개당 3.0</div></div>
+                    <div class="grid-responsive" id="grid-gificon-basic-main"></div>
+                    <div class="grid-responsive more-content" id="more-gificon-screen-b"></div>
+                    <button class="btn-more" id="btn-screen-b" onclick="toggleMore('more-screen-b', this)">더보기 ↓</button>
+                </div>
+                
             </div>
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 3.0</div></div>
@@ -714,9 +723,8 @@
     </div>
 
     <script>
-    const username = 'eatpurple';
-    const repo = 'eatpurple';
-    const branch = 'main';
+    const GITHUB_USER = 'eatpurple';
+    const GITHUB_REPO = 'eatpurple';
 
     const config = {
         defaultShowCount: 10,
@@ -735,7 +743,10 @@
             { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq' },
 
             /* 2단락 */
+              /* 방송화면 2개 폴더 */
             { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen' },
+            { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen-b' },
+
             { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner' },
             { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner' },
 
@@ -747,67 +758,61 @@
         ]
     };
 
-    const folderCache = {};
-
-    async function fetchAndRenderImages() {
+    async function loadImagesAuto() {
         for (const item of config.items) {
             const mainContainer = document.getElementById(item.mainId);
             const moreContainer = document.getElementById(item.moreId);
             const btnMore = document.getElementById(item.btnId);
-
             if (!mainContainer) continue;
 
             try {
-                if (!folderCache[item.path]) {
-                    const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${item.path}?ref=${branch}`;
-                    const response = await fetch(apiUrl);
-                    if (response.ok) {
-                        folderCache[item.path] = await response.json();
-                    } else {
-                        folderCache[item.path] = [];
-                    }
-                }
+                // GitHub API로 해당 폴더의 파일 목록만 한 번에 호출
+                const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${item.path}`);
+                if (!response.ok) continue;
 
-                const files = folderCache[item.path];
+                const filesData = await response.json();
 
-                // 대소문자 관련 없이 이미지 확장자 필터링
-                let imageFiles = files.filter(file => 
-                    /\.(png|jpe?g|gif|webp)$/i.test(file.name)
-                );
+                // 실제 존재하는 이미지 파일만 추출 (.gif, .png, .jpg 등)
+                let imageFiles = filesData.filter(f => f.type === 'file' && /\.(gif|png|jpg|jpeg|webp)$/i.test(f.name));
 
-                if (imageFiles.length <= config.defaultShowCount && btnMore) {
-                    btnMore.style.display = 'none';
-                } else if (btnMore) {
-                    btnMore.style.display = 'block';
-                }
+                // 숫자 파일명 순서대로 자동 정렬 (1, 2, 3 ... 10, 11)
+                imageFiles.sort((a, b) => {
+                    return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+                });
 
-                imageFiles.forEach((file, index) => {
-                    const targetContainer = (index < config.defaultShowCount) ? mainContainer : moreContainer;
+                let loadedCount = 0;
+
+                imageFiles.forEach(file => {
+                    loadedCount++;
+                    const targetContainer = (loadedCount <= config.defaultShowCount) ? mainContainer : moreContainer;
 
                     const box = document.createElement('div');
                     box.className = 'sample-box';
                     box.onclick = function() { openModal(this); };
 
-                    const img = document.createElement('img');
-                    // GitHub API가 보장하는 절대 다운로드 URL을 사용해 대소문자/경로 에러 방지
-                    img.src = file.download_url;
-                    img.alt = file.name;
+                    const imgTag = document.createElement('img');
+                    imgTag.src = file.download_url;
+                    imgTag.loading = "lazy";
 
-                    box.appendChild(img);
+                    box.appendChild(imgTag);
                     targetContainer.appendChild(box);
                 });
 
-            } catch (error) {
-                console.error(`폴더 로드 실패 (${item.path}):`, error);
-                if (btnMore) btnMore.style.display = 'none';
+                // 더보기 버튼 표시 여부
+                if (btnMore) {
+                    btnMore.style.display = (loadedCount > config.defaultShowCount) ? 'block' : 'none';
+                }
+
+            } catch (err) {
+                console.error(`[${item.path}] 로딩 오류:`, err);
             }
         }
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fetchAndRenderImages);
+        document.addEventListener('DOMContentLoaded', loadImagesAuto);
     } else {
-        fetchAndRenderImages();
+        loadImagesAuto();
     }
 
     // 탭 전환
@@ -818,32 +823,22 @@
         const panels = contentWrapper.querySelectorAll('.tab-panel');
 
         buttons.forEach((btn, i) => {
-            if (i === index) {
-                btn.classList.add('active');
-                panels[i].classList.add('active');
-            } else {
-                btn.classList.remove('active');
-                panels[i].classList.remove('active');
-            }
+            btn.classList.toggle('active', i === index);
+            panels[i].classList.toggle('active', i === index);
         });
     }
 
     // 더보기 토글
     function toggleMore(id, btn) {
         const target = document.getElementById(id);
-        if (target.classList.contains('show')) {
-            target.classList.remove('show');
-            btn.innerText = '더보기 ↓';
-        } else {
-            target.classList.add('show');
-            btn.innerText = '접기 ↑';
-        }
+        const isShow = target.classList.toggle('show');
+        btn.innerText = isShow ? '접기 ↑' : '더보기 ↓';
     }
 
     // 모달 기능 (사진 클릭 시 확대)
     function openModal(element) {
         const img = element.querySelector('img');
-        if (img && img.getAttribute('src')) {
+        if (img && img.src) {
             const modal = document.getElementById('imgModal');
             const modalContainer = document.getElementById('modalContainer');
             const modalImg = document.getElementById('modalImg');
@@ -852,9 +847,7 @@
 
             const rect = element.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const clickY = rect.top + scrollTop + (rect.height / 2);
-
-            modalContainer.style.top = clickY + 'px';
+            modalContainer.style.top = (rect.top + scrollTop + rect.height / 2) + 'px';
             modal.style.display = 'block';
         }
     }
@@ -862,7 +855,7 @@
     function closeModal() {
         document.getElementById('imgModal').style.display = 'none';
     }
-</script>
+    </script>
 
 </body>
 </html>
