@@ -646,10 +646,20 @@
 
         <div class="tab-content-wrapper" id="content-group-2">
             <div class="tab-panel active">
+                 <!-- A타입 -->
                 <div class="header-group"><div class="price-text">개당 5.0</div></div>
                 <div class="grid-responsive" id="grid-screen-main"></div>
                 <div class="grid-responsive more-content" id="more-screen"></div>
                 <button class="btn-more" id="btn-screen" onclick="toggleMore('more-screen', this)">더보기 ↓</button>
+                
+                  <!-- B타입 -->
+                <div class="price-sub-section">
+                    <div class="header-group"><div class="price-text">기본 개당 3.0</div></div>
+                    <div class="grid-responsive" id="grid-gificon-basic-main"></div>
+                    <div class="grid-responsive more-content" id="more-gificon-screen-b"></div>
+                    <button class="btn-more" id="btn-screen-b" onclick="toggleMore('more-screen-b', this)">더보기 ↓</button>
+                </div>
+                
             </div>
             <div class="tab-panel">
                 <div class="header-group"><div class="price-text">개당 3.0</div></div>
@@ -733,7 +743,10 @@
             { mainId: 'grid-ogq-main', moreId: 'more-ogq', btnId: 'btn-ogq', path: 'img/ogq' },
 
             /* 2단락 */
+              /* 방송화면 2개 폴더 */
             { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen' },
+            { mainId: 'grid-screen-main', moreId: 'more-screen', btnId: 'btn-screen', path: 'img/screen-b' },
+
             { mainId: 'grid-topbanner-main', moreId: 'more-topbanner', btnId: 'btn-topbanner', path: 'img/topbanner' },
             { mainId: 'grid-botbanner-main', moreId: 'more-botbanner', btnId: 'btn-botbanner', path: 'img/botbanner' },
 
