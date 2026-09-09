@@ -760,9 +760,8 @@ function loadImagesDirect() {
         if (!mainContainer) return;
 
         let loadedCount = 0;
-        // 경로에 'gif'가 포함되어 있거나 ext가 GIF면 대문자 GIF 적용
-        const isGifPath = item.path.toLowerCase().includes('gif') || item.ext === 'GIF';
-        const fileExt = isGifPath ? 'GIF' : (item.ext || 'PNG');
+        // 지정된 ext값을 그대로 사용 (없을 시 기본 PNG)
+        const fileExt = item.ext ? item.ext : 'PNG';
 
         for (let i = 1; i <= item.count; i++) {
             loadedCount++;
@@ -773,7 +772,7 @@ function loadImagesDirect() {
             box.onclick = function() { openModal(this); };
 
             const imgTag = document.createElement('img');
-            // 대문자 확장자(1.PNG, 1.GIF)로 직접 호출
+            // 대문자 확장자(.PNG / .GIF) 적용
             imgTag.src = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${fileExt}`;
             imgTag.loading = "lazy";
 
