@@ -783,8 +783,6 @@ function loadImagesDirect() {
         mainContainer.innerHTML = '';
         if (moreContainer) moreContainer.innerHTML = '';
 
-        const fileExt = item.ext.toLowerCase();
-
         for (let i = 1; i <= item.count; i++) {
             const targetContainer = (i <= config.defaultShowCount) ? mainContainer : moreContainer;
             if (!targetContainer) continue;
@@ -794,21 +792,17 @@ function loadImagesDirect() {
             box.onclick = function() { openModal(this); };
 
             const imgTag = document.createElement('img');
-            imgTag.src = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${fileExt}`;
+            // 대문자 확장자만 전용으로 다이렉트 불러오기
+            imgTag.src = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${item.ext}`;
             imgTag.loading = "lazy";
 
-            // 우클릭 및 드래그 방지 속성 직접 부여
+            // 우클릭 및 드래그 방지 속성
             imgTag.setAttribute('oncontextmenu', 'return false;');
             imgTag.setAttribute('ondragstart', 'return false;');
 
-            // 콘솔 404 잔상 최소화 및 실패 시 대문자 확장자 재시도
+            // 이미지 로드 실패 시 해당 박스만 깔끔하게 제거
             imgTag.onerror = function() {
-                if (!this.dataset.retried) {
-                    this.dataset.retried = "true";
-                    this.src = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${fileExt.toUpperCase()}`;
-                } else {
-                    box.remove();
-                }
+                box.remove();
             };
 
             box.appendChild(imgTag);
