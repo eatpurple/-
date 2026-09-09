@@ -13,21 +13,20 @@
         }
 
         body {
-            background-color: transparent;
-            padding: 60px 10px 20px 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-overflow: hidden; /* 내부 스크롤 감추기 */
-    height: auto;     /* 높이를 내용물에 맞게 자율 조절 */
+    background-color: transparent;
+    padding: 60px 10px 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
 
-
-        }
+    /* ★ 아래 줄을 추가하여 내부 스크롤을 막습니다 ★ */
+    overflow: hidden;
+}
 
         /* 프로필 섹션 */
         .profile-card {
