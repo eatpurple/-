@@ -760,28 +760,34 @@ function loadImagesDirect() {
         if (!mainContainer) return;
 
         let loadedCount = 0;
-        // 지정된 ext값을 그대로 사용 (없을 시 기본 PNG)
         const fileExt = item.ext ? item.ext : 'PNG';
 
         for (let i = 1; i <= item.count; i++) {
-            loadedCount++;
-            const targetContainer = (loadedCount <= config.defaultShowCount) ? mainContainer : moreContainer;
-
             const box = document.createElement('div');
             box.className = 'sample-box';
             box.onclick = function() { openModal(this); };
 
             const imgTag = document.createElement('img');
-            // 대문자 확장자(.PNG / .GIF) 적용
             imgTag.src = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${fileExt}`;
             imgTag.loading = "lazy";
 
-            box.appendChild(imgTag);
-            targetContainer.appendChild(box);
-        }
+            // ★ 없는 이미지(404)일 경우 박스를 삭제하고 더보기 버튼 개수 조절
+            imgTag.onerror = function() {
+                box.remove();
+            };
 
-        if (btnMore) {
-            btnMore.style.display = (loadedCount > config.defaultShowCount) ? 'block' : 'none';
+            // 정상적으로 로드된 이미지에만 순서 배정 및 추가
+            imgTag.onload = function() {
+                loadedCount++;
+                const targetContainer = (loadedCount <= config.defaultShowCount) ? mainContainer : moreContainer;
+                targetContainer.appendChild(box);
+
+                if (btnMore) {
+                    btnMore.style.display = (loadedCount > config.defaultShowCount) ? 'block' : 'none';
+                }
+            };
+
+            box.appendChild(imgTag);
         }
     });
 }
