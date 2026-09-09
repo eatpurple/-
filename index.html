@@ -13,20 +13,18 @@
         }
 
         body {
-    background-color: transparent;
-    padding: 60px 10px 20px 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-
-    /* ★ 아래 줄을 추가하여 내부 스크롤을 막습니다 ★ */
-    overflow: hidden;
-}
+            background-color: transparent;
+            padding: 60px 10px 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden; /* iframe 이중 스크롤 방지 */
+        }
 
         /* 프로필 섹션 */
         .profile-card {
@@ -457,25 +455,24 @@
 
         /* 이미지 우클릭 및 길게 누르기(다운로드) 차단 CSS */
         img, .sample-box {
-            -webkit-touch-callout: none !important; /* iOS 길게 누르기 메뉴 차단 */
-            -webkit-user-select: none !important;   /* Safari */
+            -webkit-touch-callout: none !important;
+            -webkit-user-select: none !important;
             -khtml-user-select: none !important;
-            -moz-user-select: none !important;      /* Firefox */
-            -ms-user-select: none !important;       /* IE/Edge */
-            user-select: none !important;           /* 표준 */
-            -webkit-user-drag: none !important;     /* 이미지 드래그 차단 */
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            -webkit-user-drag: none !important;
         }
 
-        /* 모달 화면 정중앙 고정 */
+        /* 클릭 스크롤 위치 맞춤형 모달 */
         .modal-overlay {
             display: none;
-            position: fixed;
-            top: 0;
+            position: absolute; /* fixed 대신 absolute 사용하여 해당위치에 표출 */
             left: 0;
-            width: 100vw;
+            width: 100%;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 999999;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 99999;
             backdrop-filter: blur(3px);
             justify-content: center;
             align-items: center;
@@ -483,11 +480,8 @@
         }
 
         .modal-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 90vw;
+            position: relative;
+            max-width: 90%;
             max-height: 85vh;
             display: flex;
             justify-content: center;
@@ -795,15 +789,12 @@ function loadImagesDirect() {
             box.onclick = function() { openModal(this); };
 
             const imgTag = document.createElement('img');
-            // 대문자 확장자만 전용으로 다이렉트 불러오기
             imgTag.src = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${item.ext}`;
             imgTag.loading = "lazy";
 
-            // 우클릭 및 드래그 방지 속성
             imgTag.setAttribute('oncontextmenu', 'return false;');
             imgTag.setAttribute('ondragstart', 'return false;');
 
-            // 이미지 로드 실패 시 해당 박스만 깔끔하게 제거
             imgTag.onerror = function() {
                 box.remove();
             };
@@ -847,6 +838,11 @@ function openModal(element) {
         const modalImg = document.getElementById('modalImg');
 
         modalImg.src = img.src;
+
+        // 클릭 시점의 스크롤 위치(Y축)를 계산해서 해당 화면 위치에 모달 배치
+        const currentScrollY = window.scrollY || document.documentElement.scrollTop;
+        modal.style.top = currentScrollY + 'px';
+
         modal.style.display = 'flex';
     }
 }
