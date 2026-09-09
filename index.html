@@ -452,7 +452,18 @@
             background-color: #E2DFFD;
         }
 
-        /* 이미지 클릭 시 모달 */
+        /* 이미지 우클릭 및 길게 누르기(다운로드) 차단 CSS */
+        img, .sample-box {
+            -webkit-touch-callout: none !important; /* iOS 길게 누르기 메뉴 차단 */
+            -webkit-user-select: none !important;   /* Safari */
+            -khtml-user-select: none !important;
+            -moz-user-select: none !important;      /* Firefox */
+            -ms-user-select: none !important;       /* IE/Edge */
+            user-select: none !important;           /* 표준 */
+            -webkit-user-drag: none !important;     /* 이미지 드래그 차단 */
+        }
+
+        /* 모달 화면 정중앙 고정 */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -460,30 +471,33 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.75);
+            background-color: rgba(0, 0, 0, 0.8);
             z-index: 999999;
             backdrop-filter: blur(3px);
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
         }
 
         .modal-container {
-            position: absolute;
+            position: fixed;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             max-width: 90vw;
             max-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             pointer-events: none;
         }
 
         .modal-content {
-            width: 100%;
-            height: 100%;
             max-width: 85vw;
             max-height: 80vh;
             border-radius: 12px;
             object-fit: contain;
             display: block;
-            margin: 0 auto;
             animation: zoomIn 0.15s ease-out;
         }
 
@@ -503,7 +517,7 @@
             .profile-name { justify-content: center; }
             .outer-frame { padding: 16px 10px; border-radius: 20px; }
             .grid-responsive { grid-template-columns: repeat(5, 1fr); gap: 4px; }
-            .grid-wide { grid-template-columns: 1fr; gap: 8px; } /* 모바일에선 1열로 넓게 세로 배치 */
+            .grid-wide { grid-template-columns: 1fr; gap: 8px; }
             .tab-btn { padding: 8px 12px; font-size: 13px; }
             .process-flow { grid-template-columns: repeat(2, 1fr); gap: 8px; }
         }
@@ -715,11 +729,20 @@
 
     <div id="imgModal" class="modal-overlay" onclick="closeModal()">
         <div class="modal-container" id="modalContainer">
-            <img id="modalImg" class="modal-content" src="" alt="확대 이미지">
+            <img id="modalImg" class="modal-content" src="" alt="확대 이미지" oncontextmenu="return false;" ondragstart="return false;">
         </div>
     </div>
 
-   <script>
+<script>
+// 전체 페이지 우클릭 및 드래그 방지
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+}, false);
+
+document.addEventListener('dragstart', function(e) {
+    e.preventDefault();
+}, false);
+
 const config = {
     defaultShowCount: 10,
     items: [
@@ -771,12 +794,14 @@ function loadImagesDirect() {
             box.onclick = function() { openModal(this); };
 
             const imgTag = document.createElement('img');
-            const primarySrc = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${fileExt}`;
-            
-            imgTag.src = primarySrc;
+            imgTag.src = `https://eatpurple.github.io/eatpurple/${item.path}/${i}.${fileExt}`;
             imgTag.loading = "lazy";
 
-            // 대소문자 문제 처리: 실패 시 대문자 확장자로 1회 재시도, 그래도 실패하면 제거
+            // 우클릭 및 드래그 방지 속성 직접 부여
+            imgTag.setAttribute('oncontextmenu', 'return false;');
+            imgTag.setAttribute('ondragstart', 'return false;');
+
+            // 콘솔 404 잔상 최소화 및 실패 시 대문자 확장자 재시도
             imgTag.onerror = function() {
                 if (!this.dataset.retried) {
                     this.dataset.retried = "true";
@@ -790,13 +815,8 @@ function loadImagesDirect() {
             targetContainer.appendChild(box);
         }
 
-        // 수량이 10개를 초과할 때만 더보기 버튼 표시
         if (btnMore) {
-            if (item.count > config.defaultShowCount) {
-                btnMore.style.display = 'block';
-            } else {
-                btnMore.style.display = 'none';
-            }
+            btnMore.style.display = (item.count > config.defaultShowCount) ? 'block' : 'none';
         }
     });
 }
